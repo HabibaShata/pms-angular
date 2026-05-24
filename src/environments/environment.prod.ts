@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://upskilling-egypt.com:3003',
+  apiUrl: 'https://upskilling-egypt.com:3003/api/v1/',
+  assetUrl: 'https://upskilling-egypt.com:3003/',
   appName: 'PMS'
 };
