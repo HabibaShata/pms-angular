@@ -1,0 +1,38 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:url("../../../assets/images/bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 80%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+}
+
+header{
+  text-align: center;
+}
+
+header img {
+  width: 150px;
+}
+
+/*********** Responsive Styles * **********/
+@media screen and (min-width: 1200px) {
+  .auth-card {
+    max-width: 40%;
+  }
+
+  header img {
+    width: 366px;
+  }
+}
