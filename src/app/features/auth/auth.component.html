@@ -22,7 +22,9 @@
               <input matInput type="email" placeholder="Enter your E-mail" formControlName="email" required>
               <mat-error *ngIf="loginForm.get('email')?.invalid &&
       (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
-                Please enter a valid email address
+                {{ loginForm.get('email')?.errors?.['required']
+                ? 'Email is required'
+                : 'Please enter a valid email address' }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -44,7 +46,9 @@
 
               <mat-error *ngIf="loginForm.get('password')?.invalid &&
       (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
-                Password must contain uppercase, lowercase, special character and minimum 6 characters
+                {{ loginForm.get('password')?.errors?.['required']
+                ? 'Password is required'
+                : 'Password must contain uppercase, lowercase, special character and minimum 6 characters' }}
               </mat-error>
             </mat-form-field>
 
@@ -69,15 +73,14 @@
 
           <!-- Button -->
           <div class="col-12">
-            <button  class="auth-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center" type="submit">
-              <span >Login</span>
+            <button class="auth-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
+              type="submit">
+              <span>Login</span>
               <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>
             </button>
           </div>
-
         </form>
       </div>
-
     </div>
   </div>
 </section>
