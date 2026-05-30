@@ -1,22 +1,22 @@
-import { Component, inject, OnDestroy} from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnDestroy {
-private formSub = new Subscription();
-  private readonly fb = inject(FormBuilder)
-  private readonly authservice = inject(AuthService)
-  private readonly toastr = inject(ToastrService)
-  private readonly router = inject(Router)
-  loginForm!: FormGroup
+  private formSub = new Subscription();
+  private readonly fb = inject(FormBuilder);
+  private readonly authservice = inject(AuthService);
+  private readonly toastr = inject(ToastrService);
+  private readonly router = inject(Router);
+  loginForm!: FormGroup;
   hide = true;
   // Variables
   errorMessage: string = '';
@@ -36,8 +36,16 @@ private formSub = new Subscription();
   formInit(): void {
     this.loginForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]]
-    })
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/,
+          ),
+        ],
+      ],
+    });
   }
   // API Functions
   onLogin(): void {
@@ -54,7 +62,10 @@ private formSub = new Subscription();
         this.errorMessage = '';
         localStorage.setItem('PMSToken', res.token);
         this.authservice.getProfile();
-        this.toastr.success('You have been logged in successfully!', 'Success!');
+        this.toastr.success(
+          'You have been logged in successfully!',
+          'Success!',
+        );
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Something went wrong';
@@ -64,7 +75,7 @@ private formSub = new Subscription();
       complete: () => {
         this.router.navigate(['/dashboard']);
         this.isLoading = false;
-      }
+      },
     });
   }
 

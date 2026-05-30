@@ -1,21 +1,22 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ILogin } from '../interface/ilogin';
+import { ILogin } from '../interfaces/ilogin';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { CurrentUser } from '../interface/current-user';
-import { IDecodedToken } from '../interface/i-decoded-token';
+import { CurrentUser } from '../interfaces/current-user';
+import { IDecodedToken } from '../interfaces/i-decoded-token';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthService {
-  private http = inject(HttpClient)
-  private router = inject(Router)
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
-  onLogin(data: ILogin): Observable<any> { return this.http.post('Users/Login', data) }
+  onLogin(data: ILogin): Observable<any> {
+    return this.http.post('Users/Login', data);
+  }
   getProfile() {
     let token = localStorage.getItem('PMSToken');
     if (token) {
@@ -25,7 +26,7 @@ export class AuthService {
   }
 
   //get Current User
-   getCurrentUserData(): Observable<CurrentUser> {
+  getCurrentUserData(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>('Users/currentUser');
   }
 
@@ -44,6 +45,4 @@ export class AuthService {
   onRegister(data: FormData): Observable<any> {
     return this.http.post('Users/Register', data);
   }
-
-
 }
