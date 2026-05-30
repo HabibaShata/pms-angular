@@ -1,11 +1,86 @@
 <section class="auth-container flex-column d-flex align-items-center justify-content-center">
   <header class="mb-4">
-    <img src="../../../../../assets/images/Logo-PMS3.svg" alt="Logo">
+    <img src="../../../assets/images/Logo-PMS3.svg" alt="Logo" class="w-100">
   </header>
-  
+
   <div class="auth-card d-flex flex-column align-items-center">
     <div class="w-100">
-      <router-outlet></router-outlet>
+      <!----Auth Header------->
+      <div class="w-100">
+        <app-auth-header [title]="'Login'" [description]="'welcome to PMS'" />
+      </div>
+      <!------------>
+
+      <div class="container">
+        <form class="w-100 row" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <!-- Email -->
+          <div class="col-12">
+            <label class="custom-label mb-2">
+              E-mail
+            </label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput type="email" placeholder="Enter your E-mail" formControlName="email" required>
+              <mat-error *ngIf="loginForm.get('email')?.invalid &&
+      (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
+                {{ loginForm.get('email')?.errors?.['required']
+                ? 'Email is required'
+                : 'Please enter a valid email address' }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Password -->
+          <div class="col-12">
+            <label class="custom-label mb-2">
+              Password
+            </label>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password"
+                formControlName="password" required>
+              <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+                <mat-icon>
+                  {{ hide ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+              </button>
+
+              <mat-error *ngIf="loginForm.get('password')?.invalid &&
+      (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
+                {{ loginForm.get('password')?.errors?.['required']
+                ? 'Password is required'
+                : 'Password must contain uppercase, lowercase, special character and minimum 6 characters' }}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <!-- Links -->
+          <div class="col-12 gap-3 d-flex justify-content-between align-items-center flex-wrap auth-links">
+            <a routerLink="/auth/register" class="auth-link">
+              Create Account
+            </a>
+            <a routerLink="/auth/forgot-password" class="auth-link primary-link">
+              Forgot Password?
+            </a>
+          </div>
+
+          <!-- Error Message -->
+          <div class="col-12" *ngIf="errorMessage">
+            <div class="alert alert-danger mb-2 py-1">
+              {{ errorMessage }}
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="col-12">
+            <button class="auth-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
+              type="submit">
+              <span>Login</span>
+              <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </section>

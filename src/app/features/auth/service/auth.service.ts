@@ -3,15 +3,31 @@ import { Observable } from 'rxjs';
 import { ILogin } from '../interface/ilogin';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CurrentUser } from '../interface/current-user';
+import { IDecodedToken } from '../interface/i-decoded-token';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private http = inject(HttpClient)
   private router = inject(Router)
 
   onLogin(data: ILogin): Observable<any> { return this.http.post('Users/Login', data) }
+  getProfile() {
+    let token = localStorage.getItem('PMSToken');
+    if (token) {
+      let userDecode = jwtDecode<IDecodedToken>(token);
+      localStorage.setItem('userRole', userDecode.userGroup);
+    }
+  }
+
+  //get Current User
+   getCurrentUserData(): Observable<CurrentUser> {
+    return this.http.get<CurrentUser>('Users/currentUser');
+  }
 
   //Get User Role
   getRole(): string | null {
@@ -20,7 +36,7 @@ export class AuthService {
 
   // logout
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('PMSToken');
     localStorage.removeItem('userRole');
     this.router.navigate(['/auth/login']);
   }

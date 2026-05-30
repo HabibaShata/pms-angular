@@ -12,9 +12,9 @@ import { environment } from 'src/environments/environment';
 export class GeneralInterceptor implements HttpInterceptor {
 
   constructor() {}
-  
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('PMSToken');
       const modifiedRequest = request.clone({
         url: `${environment.apiUrl}${request.url}`,
         setHeaders: (token) ? { Authorization: `Bearer ${token}` } : {}
