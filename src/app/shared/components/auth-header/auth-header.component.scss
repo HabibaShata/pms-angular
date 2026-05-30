@@ -3,22 +3,37 @@
   width: 100%;
   margin-top: 25px;
   margin-bottom: 33px;
-}
 
-.header h1,
-.header p {
-  font-family: var(--secondary-font-family);
-  line-height: normal;
-}
+  h1,
+  p {
+    font-family: var(--secondary-font-family);
+    letter-spacing: -0.025rem;
+  }
 
-.header h1 {
-  font-weight: 700;
-  font-size: 1.5625rem;
-  color: var(--heading-color);
-  margin-bottom: 8px;
-}
-.header p {
-  color: var(--paragraph-color);
-  font-weight: 400;
-  font-size: 1rem;
+  h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      display: block;
+      width: 16px;
+      height: 4px;
+      background-color: var(--primary-color);
+      margin-top: 8px;
+    }
+  }
+
+  p {
+    color: var(--white-color);
+    text-transform: capitalize;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: .8125rem;
+  }
 }
