@@ -10,10 +10,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'auth'
+    redirectTo: 'login'
   },
   {
-    path: 'auth',
+    path: 'login',
     component: AuthComponent,
     title: 'Login'
   },
