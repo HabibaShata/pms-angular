@@ -22,6 +22,7 @@ export class AuthService {
     let token = localStorage.getItem('PMSToken');
     if (token) {
       let userDecode = jwtDecode<IDecodedToken>(token);
+
       localStorage.setItem('userRole', userDecode.userGroup);
     }
   }
@@ -51,5 +52,9 @@ export class AuthService {
   }
   onChangePassword(data: FormData): Observable<any> {
     return this.http.put('Users/ChangePassword', data);
+  }
+  //====== Forgot Password ======
+  onForgotPass(data: { email: string }): Observable<any> {
+    return this.http.post('Users/Reset/Request', data);
   }
 }
