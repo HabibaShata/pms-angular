@@ -60,17 +60,25 @@ export class VerifyAccountComponent {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.toastrService.success('Your email is verified', 'Success', {
-            timeOut: 5000,
-          });
+          this.toastrService.success(
+            res.message || 'Your email is verified',
+            'Success',
+            {
+              timeOut: 5000,
+            },
+          );
           this.isLoading = false;
         },
         error: (err) => {
           console.log(err);
 
-          this.toastrService.error('Error!', 'Your email is not verified', {
-            timeOut: 5000,
-          });
+          this.toastrService.error(
+            err.error?.message || 'Your email is not verified',
+            'Error!',
+            {
+              timeOut: 5000,
+            },
+          );
           this.isLoading = false;
         },
         complete: () => {
