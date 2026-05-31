@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CurrentUser } from '../interfaces/current-user';
 import { IDecodedToken } from '../interfaces/i-decoded-token';
 import { jwtDecode } from 'jwt-decode';
+import { IVerify } from '../interfaces/i-verify';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class AuthService {
     let token = localStorage.getItem('PMSToken');
     if (token) {
       let userDecode = jwtDecode<IDecodedToken>(token);
+
       localStorage.setItem('userRole', userDecode.userGroup);
     }
   }
@@ -44,5 +46,15 @@ export class AuthService {
 
   onRegister(data: FormData): Observable<any> {
     return this.http.post('Users/Register', data);
+  }
+  onVerifyAccount(data: IVerify): Observable<any> {
+    return this.http.put('users/verify', data);
+  }
+  onChangePassword(data: FormData): Observable<any> {
+    return this.http.put('Users/ChangePassword', data);
+  }
+  //====== Forgot Password ======
+  onForgotPass(data: { email: string }): Observable<any> {
+    return this.http.post('Users/Reset/Request', data);
   }
 }

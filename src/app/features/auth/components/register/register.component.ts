@@ -5,19 +5,16 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
-
-
 export const passwordMatchValidator: ValidatorFn = (
-  control: AbstractControl
+  control: AbstractControl,
 ): ValidationErrors | null => {
-
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
 
@@ -25,10 +22,7 @@ export const passwordMatchValidator: ValidatorFn = (
     return null;
   }
 
-  if (
-    confirmPassword.value &&
-    password.value !== confirmPassword.value
-  ) {
+  if (confirmPassword.value && password.value !== confirmPassword.value) {
     confirmPassword.setErrors({ passwordMismatch: true });
   } else {
     if (confirmPassword.hasError('passwordMismatch')) {
@@ -39,14 +33,12 @@ export const passwordMatchValidator: ValidatorFn = (
   return null;
 };
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnDestroy {
-
   private formSub = new Subscription();
 
   private readonly fb = inject(FormBuilder);
@@ -59,11 +51,10 @@ export class RegisterComponent implements OnDestroy {
   isLoading = false;
   errorMessage = '';
   hidePassword = true;
-hideConfirmPassword = true;
+  hideConfirmPassword = true;
 
   imagePreview: string | ArrayBuffer | null = null;
   selectedFile!: File;
-
 
   constructor() {
     this.formInit();
@@ -74,45 +65,65 @@ hideConfirmPassword = true;
   }
 
   formInit(): void {
-    this.registerForm = this.fb.group({
-      userName: ['', [Validators.required,Validators.maxLength(8), Validators.pattern(/^(?=.*[A-Za-z])[A-Za-z]+[0-9]+$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      country: ['', Validators.required],
-      phoneNumber: [ '',[ Validators.required, Validators.pattern(/^[0-9]{11}$/) ]],
-      profileImage: [null],
-      password: [ null,  [ Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/, ),], ],
-      confirmPassword: ['', Validators.required]},
-      { validators: passwordMatchValidator });
+    this.registerForm = this.fb.group(
+      {
+        userName: [
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(8),
+            Validators.pattern(/^(?=.*[A-Za-z])[A-Za-z]+[0-9]+$/),
+          ],
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        country: ['', Validators.required],
+        phoneNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^[0-9]{11}$/)],
+        ],
+        profileImage: [null],
+        password: [
+          null,
+          [
+            Validators.required,
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+            ),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: passwordMatchValidator },
+    );
   }
 
   // handle file input
   onFileChange(event: any): void {
-  const file = event.target.files[0];
+    const file = event.target.files[0];
 
-  if (file) {
-    this.selectedFile = file;
+    if (file) {
+      this.selectedFile = file;
 
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
 
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    }
   }
-}
-
-
-
 
   onRegister(): void {
-
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+    if (
+      this.registerForm.value.password !==
+      this.registerForm.value.confirmPassword
+    ) {
       this.toastr.error('Passwords do not match', 'Error');
       return;
     }
@@ -135,8 +146,8 @@ hideConfirmPassword = true;
     this.formSub = this.authService.onRegister(formData).subscribe({
       next: (res) => {
         this.toastr.success('Account created successfully', 'Success');
-        localStorage.setItem('userEmail', this.registerForm.value.email);
-        this.router.navigate(['/auth/login']);
+        localStorage.setItem('email', this.registerForm.value.email);
+        this.router.navigate(['/auth/verify-account']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Error occurred';
@@ -145,7 +156,7 @@ hideConfirmPassword = true;
       },
       complete: () => {
         this.isLoading = false;
-      }
+      },
     });
   }
 }
