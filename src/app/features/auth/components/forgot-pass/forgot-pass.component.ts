@@ -39,6 +39,7 @@ export class ForgotPassComponent implements OnInit {
       next: (response) => {
         this.isLoading = false;
         this.errorMessage = '';
+        localStorage.setItem('userEmail', this.forgotPassForm.value.email);
         this._ToastrService.success(
           response.message ||
             'Password reset request successful. Please check your email.',

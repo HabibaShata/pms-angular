@@ -57,4 +57,9 @@ export class AuthService {
   onForgotPass(data: { email: string }): Observable<any> {
     return this.http.post('Users/Reset/Request', data);
   }
+
+  //====== Reset Password ======
+  onResetPass(data: FormData): Observable<any> {
+    return this.http.post('Users/Reset', data);
+  }
 }
