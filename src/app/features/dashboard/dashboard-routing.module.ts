@@ -4,17 +4,28 @@ import { DashboardComponent } from './dashboard.component';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-
+  {
+    path: '',
+    component: DashboardComponent,
+    children: [
+      {
+        path:'',
+        redirectTo: 'employee',
+        pathMatch: 'full'
+      },
+      { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
+    ],
+  },
   {
     path: 'profile/change-password',
     component: ChangePasswordComponent,
     title: 'Change Password',
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }

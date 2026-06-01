@@ -10,7 +10,14 @@ import { AuthHeaderComponent } from './components/auth-header/auth-header.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { HeaderComponent } from './components/Layout/header/header.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { SidebarComponent } from './components/Layout/sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 const shared = [
   CommonModule,
   ReactiveFormsModule,
@@ -20,6 +27,10 @@ const shared = [
   MatInputModule,
   MatFormFieldModule,
   MatProgressSpinnerModule,
+  MatToolbarModule,
+  MatDividerModule,
+  MatMenuModule,
+  FormsModule
 ];
 
 @NgModule({
@@ -27,8 +38,10 @@ const shared = [
     NotFoundPageComponent,
     AuthHeaderComponent,
     ChangePasswordComponent,
+    HeaderComponent,
+    SidebarComponent,
   ],
-  imports: [shared],
-  exports: [shared, AuthHeaderComponent, ChangePasswordComponent],
+  imports: [shared, RouterModule],
+  exports: [shared, AuthHeaderComponent, ChangePasswordComponent, HeaderComponent, SidebarComponent],
 })
 export class SharedModule {}

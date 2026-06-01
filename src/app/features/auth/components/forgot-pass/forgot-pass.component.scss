@@ -1,10 +1,8 @@
 .auth-container {
   min-height: 100vh;
   width: 100%;
-  background: url("../../../../../assets/images/bg.png") no-repeat center /
-    cover;
-
-  padding: 1rem;
+  background: url("../../../../../assets/images/bg.png") no-repeat center /cover;
+  padding: 3rem 1rem;
   position: relative;
 
   &::after {
