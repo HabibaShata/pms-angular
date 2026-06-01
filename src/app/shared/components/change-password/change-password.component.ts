@@ -49,15 +49,14 @@ export class ChangePasswordComponent implements OnInit {
     );
   }
 
-  passwordMatch(g: AbstractControl) {
-    const newPassword = g.get('newPassword')?.value;
-    const confirmNewPassword = g.get('confirmNewPassword')?.value;
+  private passwordMatch(control: AbstractControl) {
+    const newPassword = control.get('newPassword')?.value;
+    const confirmNewPassword = control.get('confirmNewPassword')?.value;
 
     return newPassword === confirmNewPassword
       ? null
       : { passwordMismatch: true };
   }
-
   onSubmit() {
     if (this.changePassForm.invalid) {
       this.changePassForm.markAllAsTouched();
@@ -66,13 +65,15 @@ export class ChangePasswordComponent implements OnInit {
     this.isLoading = true;
     this.authService.onChangePassword(this.changePassForm.value).subscribe({
       next: (res) => {
-        console.log(res);
-        this.toastrService.success('Password has been changed successfully!');
+        console.log(res.message);
+        this.toastrService.success(res.message, 'Success');
+        this.changePassForm.reset();
         this.isLoading = false;
       },
       error: (err) => {
-        console.log(err);
-        this.errorMessage = err.error?.Message;
+        this.toastrService.error(err.error?.message, 'Error!', {
+          timeOut: 5000,
+        });
         this.isLoading = false;
       },
     });

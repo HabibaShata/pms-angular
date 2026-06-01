@@ -94,6 +94,7 @@
             <button
               class="auth-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
               type="submit"
+              [disabled]="verifyAccForm.invalid"
             >
               <span>Save</span>
               <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>

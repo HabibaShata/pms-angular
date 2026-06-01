@@ -43,11 +43,6 @@ const routes: Routes = [
     component: VerifyAccountComponent,
     title: 'Verify Account',
   },
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent,
-    title: 'Change Password',
-  },
 ];
 
 @NgModule({
