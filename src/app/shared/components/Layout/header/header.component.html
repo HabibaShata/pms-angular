@@ -1,0 +1,95 @@
+<mat-toolbar class="app-header">
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="../../../../../assets/images/header-logo.svg" alt="Logo" class="logo-img w-100">
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="header-right">
+       <!-- Notifications -->
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+      
+    <!-- User Menu -->
+    <ng-container *ngIf="currentUser">
+
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+
+        <div class="avatar-img" *ngIf="currentUser.imagePath">
+
+          <img [src]="assetUrl + currentUser.imagePath" (error)="onImageError($event)" [alt]="currentUser.userName">
+        </div>
+
+        <div class="avatar" *ngIf="!currentUser.imagePath">
+
+          {{ currentUser.userName.slice(0,2).toUpperCase() }}
+        </div>
+
+        <span>{{ currentUser.userName }}</span>
+
+        <mat-icon>keyboard_arrow_down</mat-icon>
+
+      </button>
+
+      <!--Settings-->
+      <mat-menu #userMenu="matMenu">
+
+        <div class="px-3 py-2">
+          <div class="d-flex align-items-center gap-2">
+
+            <div class="avatar-img" *ngIf="currentUser.imagePath">
+
+              <img [src]="assetUrl + currentUser.imagePath" [alt]="currentUser.userName">
+            </div>
+
+            <div class="avatar" *ngIf="!currentUser.imagePath">
+
+              {{ currentUser.userName.slice(0,2).toUpperCase() }}
+            </div>
+
+            <div>
+              <div>{{ currentUser.userName }}</div>
+              <small>{{ currentUser.email }}</small>
+            </div>
+
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item routerLink="/dashboard">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+
+        <button mat-menu-item routerLink="/dashboard/profile/change-password">
+          <mat-icon>key</mat-icon>
+          <span>Change Password</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon color="warn">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+
+      </mat-menu>
+
+    </ng-container>
+
+    <!-- Mobile Menu -->
+    <!-- <button
+      *ngIf="(isMobile$ | async)"
+      mat-icon-button
+      (click)="toggleSidebar()">
+
+      <mat-icon>menu</mat-icon>
+    </button> -->
+
+  </div>
+
+</mat-toolbar>

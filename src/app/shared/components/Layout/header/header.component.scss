@@ -1,0 +1,58 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.search-bar {
+  width: 350px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar,
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+.avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:host ::ng-deep .mat-mdc-button .mdc-button__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo {
+  width: 166px;
+}
