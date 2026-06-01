@@ -1,0 +1,30 @@
+<div
+  class="sidebar"
+  [class.collapsed]="collapsed"
+  [class.expanded-on-hover]="collapsed && hovered"
+  (mouseenter)="hovered = true"
+  (mouseleave)="hovered = false"
+>
+  <div class="sidebar-header">
+    <button (click)="toggleSidebar()">
+      <i class="fa fa-angle-left"></i>
+    </button>
+  </div>
+
+  <ul class="menu">
+    <li>
+      <i class="fa-solid fa-house"></i>
+      <span class="label">Users</span>
+    </li>
+
+    <li>
+      <i class="fa-solid fa-user"></i>
+      <span class="label">Projects</span>
+    </li>
+
+    <li>
+      <i class="fa-solid fa-gear"></i>
+      <span class="label">Tasks</span>
+    </li>
+  </ul>
+</div>

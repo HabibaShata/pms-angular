@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<!-- dashboard.component.html -->
+<div class="app-shell">
+  <app-header></app-header>
+
+  <!-- Main area -->
+  <div class="main-area">
+
+    <app-sidebar></app-sidebar>
+
+    <!-- Page content -->
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

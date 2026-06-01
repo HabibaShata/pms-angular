@@ -1,0 +1,72 @@
+.sidebar {
+  width: 217px;
+  height: 100vh;
+  background: var(--secondary-color);
+  color: white;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  padding-top: 60px;
+}
+
+.sidebar-header button {
+  position: absolute;
+  right: -4px;
+  top: 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px 0 0 8px;
+  padding: 5px;
+  height: 42px;
+  border-color: transparent;
+  color: white;
+
+  i {
+    font-size: 18px;
+  }
+}
+
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed.expanded-on-hover {
+  width: 217px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.menu li i {
+  min-width: 20px;
+  text-align: center;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.sidebar.collapsed:not(.expanded-on-hover) .label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sidebar.collapsed.expanded-on-hover .label {
+  opacity: 1;
+  visibility: visible;
+}
+
+.label {
+  transition: opacity 0.2s;
+}

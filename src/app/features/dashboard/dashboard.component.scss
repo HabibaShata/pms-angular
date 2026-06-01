@@ -1,0 +1,26 @@
+/* // Main area */
+.main-area {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  background: var(--white-color);
+}
+
+.content {
+  flex: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.app-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 0 0 0;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+  font-size: 12px;
+  color: #9ca3af;
+}

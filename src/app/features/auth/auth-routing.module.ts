@@ -5,7 +5,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { ResetPassComponent } from './components/reset-pass/reset-pass.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
-import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
 const routes: Routes = [
   {
