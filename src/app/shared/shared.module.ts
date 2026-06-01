@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { HeaderComponent } from './components/Layout/header/header.component';
-
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +30,8 @@ const shared = [
   MatToolbarModule,
   MatDividerModule,
   MatMenuModule,
-  FormsModule
+  MatBadgeModule,
+  FormsModule,
 ];
 
 @NgModule({
@@ -42,6 +43,12 @@ const shared = [
     SidebarComponent,
   ],
   imports: [shared, RouterModule],
-  exports: [shared, AuthHeaderComponent, ChangePasswordComponent, HeaderComponent, SidebarComponent],
+  exports: [
+    shared,
+    AuthHeaderComponent,
+    ChangePasswordComponent,
+    HeaderComponent,
+    SidebarComponent,
+  ],
 })
 export class SharedModule {}

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  box-shadow: 0px 1px 4px 0px #00000026;
 }
 
 .spacer {
@@ -51,6 +52,15 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+:host ::ng-deep .mat-mdc-icon-button .mat-icon {
+  color: var(--primary-color);
+}
+
+::ng-deep .mat-badge-content {
+  background: var(--primary-color);
+  border: 1px solid white;
+  color: white;
 }
 
 .logo {
