@@ -23,7 +23,6 @@ export class ChangePasswordComponent implements OnInit {
   hideNew = true;
   hideConfirm = true;
   isLoading = false;
-  errorMessage = '';
 
   changePassForm!: FormGroup;
 

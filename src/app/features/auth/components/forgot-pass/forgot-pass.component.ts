@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class ForgotPassComponent implements OnInit {
   isLoading: boolean = false;
-  errorMessage: string = '';
   forgotPassForm!: FormGroup;
   userEmail: string | null = localStorage.getItem('userEmail');
   private readonly _authservice = inject(AuthService);
@@ -38,7 +37,7 @@ export class ForgotPassComponent implements OnInit {
     this._authservice.onForgotPass(this.forgotPassForm.value).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.errorMessage = '';
+
         localStorage.setItem('userEmail', this.forgotPassForm.value.email);
         this._ToastrService.success(
           response.message ||
@@ -52,8 +51,6 @@ export class ForgotPassComponent implements OnInit {
           error.error?.message || 'An error occurred. Please try again.',
           'Error',
         );
-        this.errorMessage =
-          error.error?.message || 'An error occurred. Please try again.';
       },
       complete: () => {
         this.isLoading = false;

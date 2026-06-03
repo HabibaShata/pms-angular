@@ -1,7 +1,7 @@
 <section
   class="auth-container flex-column d-flex align-items-center justify-content-center"
 >
-  <header class="mb-4">
+  <header class="auth-header-logo mb-4">
     <img src="../../../assets/images/Logo-PMS3.svg" alt="Logo" class="w-100" />
   </header>
 
@@ -82,19 +82,11 @@
             </mat-form-field>
           </div>
 
-          <!-- Error Message -->
-          <div class="col-12" *ngIf="errorMessage">
-            <div class="alert alert-danger mb-2 py-1">
-              {{ errorMessage }}
-            </div>
-          </div>
-
           <!-- Button -->
           <div class="col-12">
             <button
-              class="auth-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
+              class="main-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
               type="submit"
-              [disabled]="verifyAccForm.invalid"
             >
               <span>Save</span>
               <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>

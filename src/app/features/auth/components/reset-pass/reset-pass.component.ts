@@ -25,7 +25,6 @@ export class ResetPassComponent implements OnInit {
   isLoading: boolean = false;
   hide: boolean = true;
   confirmHide: boolean = true;
-  errorMessage: string = '';
   userEmail: string | null = localStorage.getItem('userEmail');
 
   ngOnInit(): void {
@@ -61,7 +60,7 @@ export class ResetPassComponent implements OnInit {
     this._AuthService.onResetPass(this.resetPassForm.value).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.errorMessage = '';
+
         this._toastr.success(
           response.message || 'Password reset successfully.',
           'Success',
@@ -69,9 +68,11 @@ export class ResetPassComponent implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage =
-          error.error?.message || 'An error occurred. Please try again.';
-        this._toastr.error(this.errorMessage);
+
+        this._toastr.error(
+          error.error?.message || 'An error occurred. Please try again.',
+          'Error',
+        );
       },
       complete: () => {
         localStorage.removeItem('userEmail');

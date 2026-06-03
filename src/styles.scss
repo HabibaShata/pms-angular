@@ -1,7 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,10 +20,15 @@ $pms-angular-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$pms-angular-theme: mat.define-light-theme((color: (primary: $pms-angular-primary,
-        accent: $pms-angular-accent,
-        warn: $pms-angular-warn,
-      )));
+$pms-angular-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $pms-angular-primary,
+      accent: $pms-angular-accent,
+      warn: $pms-angular-warn,
+    ),
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -31,11 +36,12 @@ $pms-angular-theme: mat.define-light-theme((color: (primary: $pms-angular-primar
 @include mat.all-component-themes($pms-angular-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@import './assets/styles/Fonts.scss';
+@import "./assets/styles/Fonts.scss";
+@import "./assets/styles/_utilities.scss";
 
 :root {
-  --primary-color: #EF9B28;
-  --secondary-color: #0E382F;
+  --primary-color: #ef9b28;
+  --secondary-color: #0e382f;
   --nav-link: #009247;
   --nav-active: rgba(0, 146, 71, 10%);
   --white-color: #fff;

@@ -19,7 +19,6 @@ export class AuthComponent implements OnDestroy {
   loginForm!: FormGroup;
   hide = true;
   // Variables
-  errorMessage: string = '';
   isLoading: boolean = false;
 
   // Constructor
@@ -59,7 +58,6 @@ export class AuthComponent implements OnDestroy {
 
     this.formSub = this.authservice.onLogin(this.loginForm.value).subscribe({
       next: (res) => {
-        this.errorMessage = '';
         localStorage.setItem('PMSToken', res.token);
         this.authservice.getProfile();
         this.toastr.success(
@@ -68,7 +66,6 @@ export class AuthComponent implements OnDestroy {
         );
       },
       error: (err) => {
-        this.errorMessage = err.error?.message || 'Something went wrong';
         this.toastr.error(err.error.message, 'Error!');
         this.isLoading = false;
       },

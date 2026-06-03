@@ -1,12 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ILogin } from '../interfaces/ilogin';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { CurrentUser } from '../interfaces/current-user';
-import { IDecodedToken } from '../interfaces/i-decoded-token';
+
 import { jwtDecode } from 'jwt-decode';
-import { IVerify } from '../interfaces/i-verify';
+import {
+  ICurrentUser,
+  IDecodedToken,
+  ILogin,
+  ILoginResponse,
+  IVerify,
+} from '../interfaces/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -15,32 +19,30 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  onLogin(data: ILogin): Observable<any> {
-    return this.http.post('Users/Login', data);
+  onLogin(data: ILogin): Observable<ILoginResponse> {
+    return this.http.post<ILoginResponse>('Users/Login', data);
   }
   getProfile() {
     let token = localStorage.getItem('PMSToken');
     if (token) {
       let userDecode = jwtDecode<IDecodedToken>(token);
 
-      localStorage.setItem('userRole', userDecode.userGroup);
+      localStorage.setItem('userGroup', userDecode.userGroup);
     }
   }
 
-  //get Current User
-  getCurrentUserData(): Observable<CurrentUser> {
-    return this.http.get<CurrentUser>('Users/currentUser');
+  //====== get logged person Data ======
+  getCurrentUserData(): Observable<ICurrentUser> {
+    return this.http.get<ICurrentUser>('Users/currentUser');
   }
 
-  //Get User Role
   getRole(): string | null {
-    return localStorage.getItem('userRole') || null;
+    return localStorage.getItem('userGroup') || null;
   }
 
-  // logout
   logout() {
     localStorage.removeItem('PMSToken');
-    localStorage.removeItem('userRole');
+    localStorage.removeItem('userGroup');
     this.router.navigate(['/auth/login']);
   }
 
@@ -53,12 +55,11 @@ export class AuthService {
   onChangePassword(data: FormData): Observable<any> {
     return this.http.put('Users/ChangePassword', data);
   }
-  //====== Forgot Password ======
+
   onForgotPass(data: { email: string }): Observable<any> {
     return this.http.post('Users/Reset/Request', data);
   }
 
-  //====== Reset Password ======
   onResetPass(data: FormData): Observable<any> {
     return this.http.post('Users/Reset', data);
   }

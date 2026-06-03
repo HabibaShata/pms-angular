@@ -9,19 +9,22 @@ const routes: Routes = [
   {
     path: 'auth',
     canActivate: [loggedGuard],
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'dashboard',
     canActivate: [authGuard],
-    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () =>
+      import('./features/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule,
+      ),
   },
-  { path: '**', component: NotFoundPageComponent, title: 'Not Found' }
+  { path: '**', component: NotFoundPageComponent, title: 'Not Found' },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

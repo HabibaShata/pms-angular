@@ -23,14 +23,9 @@ const routes: Routes = [
     title: 'Register',
   },
   {
-    path: 'forgot-password',
+    path: 'forget-password',
     component: ForgotPassComponent,
-    title: 'Forgot Password',
-  },
-  {
-    path: 'verify-account',
-    component: VerifyAccountComponent,
-    title: 'Verify Account',
+    title: 'Forget Password',
   },
   {
     path: 'reset-password',

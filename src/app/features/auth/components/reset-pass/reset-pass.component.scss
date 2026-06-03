@@ -1,63 +1,13 @@
 .auth-container {
-  min-height: 100vh;
-  width: 100%;
-  background: url("../../../../../assets/images/bg.png") no-repeat center /cover;
-  padding: 3rem 1rem;
-  position: relative;
-
   &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60vh;
     background: url("../../../../../assets/images/reset-pass-after.png")
       no-repeat;
-    background-size: contain;
-    z-index: 1;
   }
 
   &::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50vw;
-    height: 100%;
     background: url("../../../../../assets/images/reset-pass-before.png")
       no-repeat;
-    background-size: cover;
-    z-index: 1;
   }
-}
-
-.auth-card {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 80%;
-  padding: 3rem 4rem;
-  background: #315951e5;
-  border-radius: 16px;
-}
-
-header {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-
-  img {
-    width: 150px;
-  }
-}
-
-.custom-label {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--primary-color);
-  line-height: 22px;
-  letter-spacing: 1%;
 }
 
 :host {
@@ -174,99 +124,9 @@ header {
   display: none !important;
 }
 
-/**********************/
-.auth-links {
-  margin-bottom: 48px;
-
-  a {
-    font-family: var(--Inter-font);
-    color: var(--white-color);
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 22px;
-    letter-spacing: 1%;
-    text-decoration: none;
-    position: relative;
-    transition:
-      color 0.25s ease,
-      opacity 0.25s ease;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 0%;
-      height: 1px;
-      background-color: var(--white-color);
-      transition: width 0.3s ease;
-    }
-
-    &:hover {
-      opacity: 0.8;
-
-      &::after {
-        width: 100%;
-      }
-    }
-  }
-}
-
-/**********************/
-.auth-btn {
-  height: 56px;
-  width: 100%;
-  background: var(--primary-color);
-  border-radius: 96px;
-  color: var(--white-color);
-  font-family: var(--Inter-font);
-  font-size: 16px;
-  outline: none;
-  border: 1px solid transparent;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  transition:
-    background 0.3s ease,
-    transform 0.2s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-
-  &:hover {
-    background: color-mix(in srgb, var(--primary-color) 85%, #393731);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px
-      color-mix(in srgb, var(--primary-color) 50%, transparent);
-  }
-
-  &:active {
-    transform: translateY(0px);
-    box-shadow: none;
-    opacity: 0.9;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 3px;
-  }
-  &:disabled {
-    background: var(--primary-color);
-    opacity: 0.6;
-    cursor: not-allowed;
-    pointer-events: revert;
-  }
-}
-
 /*********** Responsive ***********/
 @media screen and (min-width: 1200px) {
   .auth-card {
     width: 667px;
-  }
-
-  header {
-    img {
-      width: 366px;
-    }
   }
 }

@@ -1,22 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { CurrentUser } from 'src/app/features/auth/interfaces/current-user';
+import { ICurrentUser } from 'src/app/features/auth/interfaces/auth';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
- private authService = inject(AuthService);
-  private readonly router = inject(Router)
+  private authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   assetUrl = environment.assetUrl;
 
-  currentUser!: CurrentUser;
+  currentUser!: ICurrentUser;
 
   // get isSuperAdmin(): boolean {
   //   return this.authService.getRole() === roleEnum.SuperAdmin;
@@ -30,7 +30,7 @@ export class HeaderComponent {
 
   getUserData() {
     this.authService.getCurrentUserData().subscribe({
-      next: (res: CurrentUser) => {
+      next: (res: ICurrentUser) => {
         this.currentUser = res;
       },
       error: (err) => {
@@ -38,7 +38,6 @@ export class HeaderComponent {
       },
     });
   }
-
 
   logout() {
     this.authService.logout();

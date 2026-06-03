@@ -12,27 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
-export const passwordMatchValidator: ValidatorFn = (
-  control: AbstractControl,
-): ValidationErrors | null => {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  if (!password || !confirmPassword) {
-    return null;
-  }
-
-  if (confirmPassword.value && password.value !== confirmPassword.value) {
-    confirmPassword.setErrors({ passwordMismatch: true });
-  } else {
-    if (confirmPassword.hasError('passwordMismatch')) {
-      confirmPassword.setErrors(null);
-    }
-  }
-
-  return null;
-};
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -40,7 +19,6 @@ export const passwordMatchValidator: ValidatorFn = (
 })
 export class RegisterComponent implements OnDestroy {
   private formSub = new Subscription();
-
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly toastr = inject(ToastrService);
@@ -57,14 +35,14 @@ export class RegisterComponent implements OnDestroy {
   selectedFile!: File;
 
   constructor() {
-    this.formInit();
+    this.RegisterformInit();
   }
 
   ngOnDestroy(): void {
     this.formSub.unsubscribe();
   }
 
-  formInit(): void {
+  RegisterformInit(): void {
     this.registerForm = this.fb.group(
       {
         userName: [
@@ -93,7 +71,7 @@ export class RegisterComponent implements OnDestroy {
         ],
         confirmPassword: ['', Validators.required],
       },
-      { validators: passwordMatchValidator },
+      { validators: this.passwordMatchValidator },
     );
   }
 
@@ -120,14 +98,6 @@ export class RegisterComponent implements OnDestroy {
       return;
     }
 
-    if (
-      this.registerForm.value.password !==
-      this.registerForm.value.confirmPassword
-    ) {
-      this.toastr.error('Passwords do not match', 'Error');
-      return;
-    }
-
     const formData = new FormData();
 
     formData.append('userName', this.registerForm.value.userName);
@@ -149,14 +119,35 @@ export class RegisterComponent implements OnDestroy {
         localStorage.setItem('email', this.registerForm.value.email);
         this.router.navigate(['/auth/verify-account']);
       },
-      error: (err) => {
-        this.errorMessage = err.error?.message || 'Error occurred';
-        this.toastr.error(this.errorMessage, 'Error');
+      error: (error) => {
+        this.toastr.error(
+          error.error?.message || 'An error occurred. Please try again.',
+          'Error',
+        );
         this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
       },
     });
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+
+    if (!password || !confirmPassword) {
+      return null;
+    }
+
+    if (confirmPassword.value && password.value !== confirmPassword.value) {
+      confirmPassword.setErrors({ passwordMismatch: true });
+    } else {
+      if (confirmPassword.hasError('passwordMismatch')) {
+        confirmPassword.setErrors(null);
+      }
+    }
+
+    return null;
   }
 }

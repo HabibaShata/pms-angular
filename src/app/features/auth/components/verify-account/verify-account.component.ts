@@ -22,8 +22,6 @@ export class VerifyAccountComponent {
 
   hide: boolean = true;
   isLoading: boolean = false;
-  errorMessage: string = '';
-
   verifyAccForm!: FormGroup;
 
   constructor() {
@@ -63,9 +61,6 @@ export class VerifyAccountComponent {
           this.toastrService.success(
             res.message || 'Your email is verified',
             'Success',
-            {
-              timeOut: 5000,
-            },
           );
           this.isLoading = false;
         },
@@ -75,9 +70,6 @@ export class VerifyAccountComponent {
           this.toastrService.error(
             err.error?.message || 'Your email is not verified',
             'Error!',
-            {
-              timeOut: 5000,
-            },
           );
           this.isLoading = false;
         },
