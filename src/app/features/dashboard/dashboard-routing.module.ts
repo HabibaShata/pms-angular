@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
+import { managerGuard } from 'src/app/core/guards/manager.guard';
 
 const routes: Routes = [
   {
@@ -9,9 +10,13 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path:'',
-        redirectTo: 'employee',
+        path: '',
+        redirectTo: 'manager',
         pathMatch: 'full'
+      },
+      { path: 'manager',
+        canActivate: [managerGuard],
+        loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule)
       },
       { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
     ],
@@ -21,7 +26,6 @@ const routes: Routes = [
     component: ChangePasswordComponent,
     title: 'Change Password',
   },
-
 ];
 
 @NgModule({
