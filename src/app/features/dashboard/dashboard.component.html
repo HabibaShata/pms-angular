@@ -4,11 +4,9 @@
 
   <!-- Main area -->
   <div class="main-area">
-
     <app-sidebar></app-sidebar>
-
     <!-- Page content -->
-    <main class="content">
+    <main class="content" [style.paddingLeft]="isMobile ? '10px' : (isSidebarCollapsed ? '85px' : '217px')">
       <router-outlet></router-outlet>
     </main>
   </div>

@@ -18,6 +18,14 @@ import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { SidebarComponent } from './components/Layout/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { StaticsCardComponent } from './components/dashboared-components/statics-card/statics-card.component';
+import { HomeHeaderComponent } from './components/dashboared-components/home-header/home-header.component';
+import { StaticsHeaderComponent } from './components/dashboared-components/statics-header/statics-header.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { EmptyStatusComponent } from './components/empty-status/empty-status.component';
+import { UsersChartComponent } from './components/dashboared-components/users-chart/users-chart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 const shared = [
   CommonModule,
   ReactiveFormsModule,
@@ -32,6 +40,7 @@ const shared = [
   MatMenuModule,
   MatBadgeModule,
   FormsModule,
+  NgApexchartsModule
 ];
 
 @NgModule({
@@ -41,7 +50,14 @@ const shared = [
     ChangePasswordComponent,
     HeaderComponent,
     SidebarComponent,
+    StaticsCardComponent,
+    HomeHeaderComponent,
+    StaticsHeaderComponent,
+    LoaderComponent,
+    EmptyStatusComponent,
+    UsersChartComponent,
   ],
+
   imports: [shared, RouterModule],
   exports: [
     shared,
@@ -49,6 +65,12 @@ const shared = [
     ChangePasswordComponent,
     HeaderComponent,
     SidebarComponent,
+    StaticsCardComponent,
+    HomeHeaderComponent,
+    StaticsHeaderComponent,
+    LoaderComponent,
+    EmptyStatusComponent,
+    UsersChartComponent,
   ],
 })
 export class SharedModule {}

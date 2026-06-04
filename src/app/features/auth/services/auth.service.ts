@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -18,15 +18,17 @@ import {
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private currentUserSubject = new BehaviorSubject<ICurrentUser | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   onLogin(data: ILogin): Observable<ILoginResponse> {
     return this.http.post<ILoginResponse>('Users/Login', data);
   }
+
   getProfile() {
     let token = localStorage.getItem('PMSToken');
     if (token) {
       let userDecode = jwtDecode<IDecodedToken>(token);
-
       localStorage.setItem('userGroup', userDecode.userGroup);
     }
   }

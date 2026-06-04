@@ -1,0 +1,32 @@
+.home-section {
+  background-image: url('../../../../../assets/images/home-bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  overflow: hidden;
+  min-height: 313px;
+  padding: 20px;
+
+  h1 {
+    font-size: 2.5rem;
+    color: var(--white-color);
+    margin-bottom: 23px;
+  }
+
+  h1,
+  p {
+    font-family: var(--Montserrat);
+    font-weight: 300;
+    color: var(--white-color);
+  }
+
+  P {
+    font-size: 30px;
+    color: var(--white-color);
+  }
+
+  span {
+    color: var(--primary-color);
+  }
+}

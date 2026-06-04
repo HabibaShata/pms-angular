@@ -4,6 +4,7 @@
   display: flex;
   overflow-y: auto;
   background: var(--white-color);
+  padding-top: 50px;
 }
 
 .content {
@@ -15,7 +16,6 @@
 
 .app-footer {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
   padding: 13px 0 0 0;
