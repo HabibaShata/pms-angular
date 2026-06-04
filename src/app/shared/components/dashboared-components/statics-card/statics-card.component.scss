@@ -1,0 +1,33 @@
+.card-body{
+  padding:15px 30px 15px 15px;
+  border-radius: 15px;
+  min-width: 150px;
+    h5,p{
+    font-family: var(--Inter-font);
+  }
+  h5{
+    color: #6F7881;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  p{
+    color: var(--black-color);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+}
+.img-container{
+  width:43px;
+  height:43px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img{
+    width:22px
+  }
+
+}

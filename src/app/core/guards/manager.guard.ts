@@ -1,5 +1,15 @@
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { CanActivateFn } from '@angular/router';
+import { RoleEnum } from '../enums/role.enum';
+import { inject } from '@angular/core';
 
 export const managerGuard: CanActivateFn = (route, state) => {
-  return true;
+  const authService = inject(AuthService);
+  const userRole = authService.getRole();
+
+  if (userRole == RoleEnum.Manager) {
+    return true;
+  }
+
+  return false;
 };

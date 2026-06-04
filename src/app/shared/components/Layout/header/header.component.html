@@ -1,30 +1,26 @@
 <mat-toolbar class="app-header">
   <!-- Logo -->
   <div class="logo">
-    <img
-      src="../../../../../assets/images/header-logo.svg"
-      alt="Logo"
-      class="logo-img w-100"
-    />
+    <img src="../../../../../assets/images/header-logo.svg" alt="Logo" class="logo-img w-100" />
   </div>
 
   <span class="spacer"></span>
 
-  <div class="header-right me-4">
+  <div class="header-right flex-row-reverse flex-lg-row me-4">
     <!-- Notifications -->
     <button mat-icon-button>
       <mat-icon matBadge="1" matBadgeColor="accent">notifications</mat-icon>
     </button>
-    <mat-divider [vertical]="true" style="height: 50px"></mat-divider>
-    <!-- User Menu -->
+    <!---Toggle Sidebar in small Screens-->
+    <button mat-icon-button *ngIf="isMobile" (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!--Start Of User Menu -->
     <ng-container *ngIf="currentUser">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
         <div class="avatar-img" *ngIf="currentUser.imagePath">
-          <img
-            [src]="assetUrl + currentUser.imagePath"
-            (error)="onImageError($event)"
-            [alt]="currentUser.userName"
-          />
+          <img [src]="assetUrl + currentUser.imagePath" (error)="onImageError($event)" [alt]="currentUser.userName" />
         </div>
 
         <div class="avatar" *ngIf="!currentUser.imagePath">
@@ -42,10 +38,7 @@
         <div class="px-3 py-2">
           <div class="d-flex align-items-center gap-2">
             <div class="avatar-img" *ngIf="currentUser.imagePath">
-              <img
-                [src]="assetUrl + currentUser.imagePath"
-                [alt]="currentUser.userName"
-              />
+              <img [src]="assetUrl + currentUser.imagePath" [alt]="currentUser.userName" />
             </div>
 
             <div class="avatar" *ngIf="!currentUser.imagePath">
@@ -79,14 +72,6 @@
         </button>
       </mat-menu>
     </ng-container>
-
-    <!-- Mobile Menu -->
-    <!-- <button
-      *ngIf="(isMobile$ | async)"
-      mat-icon-button
-      (click)="toggleSidebar()">
-
-      <mat-icon>menu</mat-icon>
-    </button> -->
+    <!--End Of User Menu-->
   </div>
 </mat-toolbar>

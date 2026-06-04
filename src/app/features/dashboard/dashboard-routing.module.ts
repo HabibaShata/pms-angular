@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 import { managerGuard } from 'src/app/core/guards/manager.guard';
+import { redirectGuard } from 'src/app/core/guards/redirect.guard';
 
 const routes: Routes = [
   {
@@ -11,14 +12,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'manager',
-        pathMatch: 'full'
+        canActivate: [redirectGuard],
+        pathMatch: 'full',
+        component: DashboardComponent,
       },
-      { path: 'manager',
+      {
+        path: 'manager',
         canActivate: [managerGuard],
         loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule)
       },
-      { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
+      {
+        path: 'employee',
+        loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)
+      },
     ],
   },
   {

@@ -1,29 +1,38 @@
-<div
-  class="sidebar"
-  [class.collapsed]="collapsed"
-  (mouseenter)="hovered = true"
-  (mouseleave)="hovered = false"
->
-  <div class="sidebar-header">
-    <button (click)="toggleSidebar()">
-      <i class="fa fa-angle-left"></i>
-    </button>
-  </div>
+<!-- Overlay (ONLY mobile) -->
+<div class="sidebar-overlay" *ngIf="isMobileOpen" (click)="toggleMobileSidebar()"></div>
 
-  <ul class="menu">
-    <li>
-      <i class="fa-solid fa-house"></i>
-      <span class="label">Users</span>
-    </li>
-
-    <li>
-      <i class="fa-solid fa-user"></i>
-      <span class="label">Projects</span>
-    </li>
-
-    <li>
-      <i class="fa-solid fa-gear"></i>
-      <span class="label">Tasks</span>
-    </li>
-  </ul>
+<div class="sidebar-header" *ngIf="isMobileOpen">
+  <button (click)="toggleMobileSidebar()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
 </div>
+
+
+<!---Start Of Sidebar--->
+<div class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
+  <div class="sidebar-content">
+    <div class="sidebar-header d-none d-lg-flex">
+      <button (click)="toggleSidebar()">
+        <i class="fa fa-angle-left"></i>
+      </button>
+    </div>
+
+    <ul class="menu">
+      <li>
+        <i class="fa-solid fa-house"></i>
+        <span class="label">Users</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-user"></i>
+        <span class="label">Projects</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-gear"></i>
+        <span class="label">Tasks</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<!---End Of Sidebar--->

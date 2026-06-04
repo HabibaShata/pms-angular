@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Component, inject, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/core/services/sidebar.service';
 import { ICurrentUser } from 'src/app/features/auth/interfaces/auth';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -10,22 +9,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);
-  private readonly router = inject(Router);
-
+  private sidebarService = inject(SidebarService);
   assetUrl = environment.assetUrl;
-
   currentUser!: ICurrentUser;
 
-  // get isSuperAdmin(): boolean {
-  //   return this.authService.getRole() === roleEnum.SuperAdmin;
-  // }
-
-  //image Error
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    img.src = '../../../../../assets/images/user-placeholder.png';
+  ngOnInit(): void {
+    this.getUserData();
   }
 
   getUserData() {
@@ -43,26 +34,19 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  //Search by name
-  name: string = '';
-  searchSubject: Subject<string> = new Subject();
-  onSearchChange(value: string): void {
-    this.searchSubject.next(value);
+  // Returns current mobile screen status
+  get isMobile() {
+    return this.sidebarService.isMobile;
   }
 
-  ngOnInit(): void {
-    // this.searchSubject.pipe(debounceTime(500)).subscribe((value) => {
-    //   console.log('search value:', value);
+  // Open/close mobile sidebar drawer
+  toggleSidebar() {
+    this.sidebarService.toggleMobile();
+  }
 
-    //   const route = this.isSuperAdmin
-    //     ? '/dashboard/admin/recipes'
-    //     : '/dashboard/userPortal/user-recipes';
-    //   console.log('route:', route);
-    //   this.router.navigate([route], {
-    //     queryParams: { name: value }
-    //   });
-    // });
-    //get Current USer Data
-    this.getUserData();
+  //image Error
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = '../../../../../assets/images/user-placeholder.png';
   }
 }

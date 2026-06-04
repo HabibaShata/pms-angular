@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SidebarService } from 'src/app/core/services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
- collapsed = false;
-  hovered = false;
+  private readonly SidebarService = inject(SidebarService);
+
+  //For Large Screens sidebar Collapsed State
+  get isCollapsed() {
+    return this.SidebarService.value;
+  }
 
   toggleSidebar() {
-    this.collapsed = !this.collapsed;
+    this.SidebarService.toggle();
+  }
+
+  //For Mobile Screens sidebar Toggle State
+  get isMobileOpen() {
+    return this.SidebarService.isMobileOpen;
+  }
+
+  toggleMobileSidebar() {
+    this.SidebarService.toggleMobile();
   }
 }

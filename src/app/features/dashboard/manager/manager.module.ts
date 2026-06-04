@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerComponent } from './manager.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { A11yModule } from "@angular/cdk/a11y";
 
 
 @NgModule({
@@ -10,8 +12,10 @@ import { ManagerComponent } from './manager.component';
     ManagerComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
-    ManagerRoutingModule
-  ]
+    ManagerRoutingModule,
+    A11yModule
+]
 })
 export class ManagerModule { }
