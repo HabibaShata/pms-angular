@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GeneralInterceptor } from './core/interceptors/general.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthErrorInterceptor } from './core/interceptors/auth-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
     }),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: GeneralInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: GeneralInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

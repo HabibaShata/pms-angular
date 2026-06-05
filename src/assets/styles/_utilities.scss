@@ -20,8 +20,7 @@
   &:hover {
     background: color-mix(in srgb, var(--primary-color) 85%, #393731);
     transform: translateY(-2px);
-    box-shadow: 0 6px 10px
-      color-mix(in srgb, var(--primary-color) 50%, transparent);
+    box-shadow: 0 6px 10px color-mix(in srgb, var(--primary-color) 50%, transparent);
   }
 
   &:active {
@@ -35,6 +34,7 @@
     outline-offset: 3px;
   }
 }
+
 .auth-container {
   min-height: 100vh;
   width: 100%;
@@ -64,6 +64,7 @@
     z-index: 1;
   }
 }
+
 .auth-card {
   position: relative;
   z-index: 2;
