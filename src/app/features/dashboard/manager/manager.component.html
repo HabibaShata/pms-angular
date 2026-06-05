@@ -6,8 +6,7 @@
   <!-- ===================== STATISTICS SECTION START ===================== -->
   <section class="statics-section py-5">
     <div class="container">
-      <div class="row g-4">
-
+      <div class="row g-4" *ngIf="tasksCount && usersCount; else loader">
         <!-- ===================== TASKS STATISTICS (LEFT SIDE) ===================== -->
         <div class="col-lg-6">
           <div class="col-content">
@@ -15,12 +14,10 @@
             <app-statics-header [title]="'tasks'"
               [description]="'Here is an overview of your projects and tasks'"></app-statics-header>
 
-            <!-- Tasks Stats Cards + Chart (Only show when data exists) -->
-            <div *ngIf="tasksCount; else loader">
-
+            <!-- Tasks Stats Cards + Chart -->
+            <div>
               <!-- Tasks Summary Cards -->
               <div class="d-flex flex-wrap gap-3 px-3 stats-cards-container">
-
                 <!-- In Progress Tasks -->
                 <app-statics-card title="Progress" [value]="tasksCount.inProgress"
                   icon="../../../../assets/images/progress-card-icon.svg" bgColor="#E5E6F4" imageBgColor="#CFD1EC">
@@ -35,33 +32,30 @@
                 <app-statics-card title="Projects Number" [value]="tasksCount.done"
                   icon="../../../../assets/images/project-card-icon.svg" bgColor="#F4E5ED" imageBgColor="#E7C3D7">
                 </app-statics-card>
-
               </div>
 
               <!-- Tasks Distribution Donut Chart -->
               <app-users-chart [series]="tasksCount ? tasksSeries : []" [labels]="['In Progress', 'To Do', 'Done']"
                 [colors]="['#80CAFF', '#FFD966', '#85E0A3']">
               </app-users-chart>
-
             </div>
 
             <!-- Loader (Shown when tasks data is not yet loaded) -->
-            <ng-template #loader>
+            <!-- <ng-template #loader>
               <app-loader></app-loader>
-            </ng-template>
+            </ng-template> -->
           </div>
         </div>
 
         <!-- ===================== USERS STATISTICS (RIGHT SIDE) ===================== -->
         <div class="col-lg-6">
           <div class="col-content">
-
             <!-- Users Section Header -->
             <app-statics-header [title]="'users'"
               [description]="'Here is an overview of your users'"></app-statics-header>
 
             <!-- Users Stats Cards + Chart -->
-            <div *ngIf="usersCount; else loader">
+            <div>
 
               <!-- Users Summary Cards -->
               <div class="d-flex flex-wrap gap-3 px-3 stats-cards-container">
@@ -83,12 +77,16 @@
             </div>
 
             <!-- Loader (Shown when users data is not yet loaded) -->
-            <ng-template #loader>
+            <!-- <ng-template #loader>
               <app-loader></app-loader>
-            </ng-template>
+            </ng-template> -->
           </div>
         </div>
       </div>
+      <!-- Loader (Shown when users && Tasks data is not yet loaded) -->
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
     </div>
   </section>
   <!-- ===================== STATISTICS SECTION END ===================== -->

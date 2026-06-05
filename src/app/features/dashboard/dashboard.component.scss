@@ -2,8 +2,8 @@
 .main-area {
   flex: 1;
   display: flex;
-  overflow-y: auto;
-  background: var(--white-color);
+  // overflow-y: auto;
+  //background: var(--white-color);
   padding-top: 50px;
 }
 
@@ -11,7 +11,7 @@
   flex: 1;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
+  // padding: 20px;
 }
 
 .app-footer {

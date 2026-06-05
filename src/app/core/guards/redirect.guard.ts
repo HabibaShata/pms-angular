@@ -20,9 +20,5 @@ export const redirectGuard: CanActivateFn = (route, state) => {
     return router.createUrlTree(['/dashboard/manager']);
   }
 
-  if (role === RoleEnum.Employee) {
-    return router.createUrlTree(['/dashboard/employee']);
-  }
-
-  return router.createUrlTree(['/auth/login']);
+  return router.createUrlTree(['/dashboard/employee']);
 };

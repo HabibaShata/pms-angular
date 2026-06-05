@@ -13,7 +13,6 @@ const routes: Routes = [
       {
         path: '',
         canActivate: [redirectGuard],
-        pathMatch: 'full',
         component: DashboardComponent,
       },
       {
