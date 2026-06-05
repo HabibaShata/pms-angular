@@ -1,0 +1,90 @@
+<section class="project-list-wrapper">
+  <!-- start of header -->
+  <div class="container-fluid project-list-header">
+    <div class="row d-flex align-items-center justify-content-between mx-auto">
+      <h2 class="col-md-9">Projects</h2>
+      <!-- Button -->
+      <div class="col-md-3 d-flex justify-content-end">
+        <button
+          class="main-btn d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
+          type="submit"
+        >
+          <span class="d-flex align-items-center gap-1">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="add"
+            ></mat-icon>
+
+            Add New Project</span
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end of header -->
+  <!-- start of table -->
+  <div class="container-fluid project-list-table-container mx-auto">
+    <div class="project-list-table">
+      <mat-form-field>
+        <mat-label>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="search"
+          ></mat-icon
+          >Search By Title</mat-label
+        >
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Ex. Mia"
+          #input
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="progress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Progress</th>
+            <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+          </ng-container>
+
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="fruit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fruit</th>
+            <td mat-cell *matCellDef="let row">{{ row.fruit }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,9 @@
 <!-- Overlay (ONLY mobile) -->
-<div class="sidebar-overlay" *ngIf="isMobileOpen" (click)="toggleMobileSidebar()"></div>
+<div
+  class="sidebar-overlay"
+  *ngIf="isMobileOpen"
+  (click)="toggleMobileSidebar()"
+></div>
 
 <div class="sidebar-header" *ngIf="isMobileOpen">
   <button (click)="toggleMobileSidebar()">
@@ -7,9 +11,12 @@
   </button>
 </div>
 
-
 <!---Start Of Sidebar--->
-<div class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
+<div
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+  [class.mobile-open]="isMobileOpen"
+>
   <div class="sidebar-content">
     <div class="sidebar-header d-none d-lg-flex">
       <button (click)="toggleSidebar()">
@@ -23,7 +30,7 @@
         <span class="label">Users</span>
       </li>
 
-      <li>
+      <li routerLink="manager/projects" routerLinkActive="active">
         <i class="fa-solid fa-user"></i>
         <span class="label">Projects</span>
       </li>

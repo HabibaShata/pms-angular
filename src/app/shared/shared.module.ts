@@ -25,6 +25,9 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { EmptyStatusComponent } from './components/empty-status/empty-status.component';
 import { UsersChartComponent } from './components/dashboared-components/users-chart/users-chart.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 const shared = [
   CommonModule,
@@ -40,7 +43,10 @@ const shared = [
   MatMenuModule,
   MatBadgeModule,
   FormsModule,
-  NgApexchartsModule
+  NgApexchartsModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule,
 ];
 
 @NgModule({
