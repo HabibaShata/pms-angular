@@ -5,11 +5,13 @@ import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerComponent } from './manager.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { A11yModule } from "@angular/cdk/a11y";
+import { ProjectListComponent } from './components/project-list/project-list.component';
 
 
 @NgModule({
   declarations: [
-    ManagerComponent
+    ManagerComponent,
+    ProjectListComponent
   ],
   imports: [
     SharedModule,
