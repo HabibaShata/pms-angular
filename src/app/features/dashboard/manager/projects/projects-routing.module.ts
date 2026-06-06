@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectsComponent } from './projects.component';
+import { AddEditProjectsComponent } from './add-edit-projects/add-edit-projects.component';
 
-const routes: Routes = [{ path: '', component: ProjectsComponent }];
+const routes: Routes = [
+  { path: '', component: ProjectsComponent },
+  { path: 'add', component: AddEditProjectsComponent },
+  { path: 'edit/:id', component: AddEditProjectsComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

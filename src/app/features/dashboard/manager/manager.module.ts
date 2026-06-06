@@ -5,9 +5,10 @@ import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerComponent } from './manager.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { A11yModule } from '@angular/cdk/a11y';
+import { AddEditProjectsComponent } from './projects/add-edit-projects/add-edit-projects.component';
 
 @NgModule({
-  declarations: [ManagerComponent],
+  declarations: [ManagerComponent, AddEditProjectsComponent],
   imports: [SharedModule, CommonModule, ManagerRoutingModule, A11yModule],
 })
 export class ManagerModule {}
