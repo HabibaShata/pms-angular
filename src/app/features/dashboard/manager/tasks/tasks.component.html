@@ -2,7 +2,7 @@
   <!-- start of header -->
   <div class="container-fluid project-list-header">
     <div class="row d-flex align-items-center justify-content-between mx-auto">
-      <h2 class="col-md-9">Projects</h2>
+      <h2 class="col-md-9">Tasks</h2>
       <!-- Button -->
       <div class="col-md-3 d-flex justify-content-end">
         <button
@@ -16,7 +16,7 @@
               fontIcon="add"
             ></mat-icon>
 
-            Add New Project</span
+            Add New Task</span
           >
         </button>
       </div>
@@ -49,37 +49,49 @@
       <div class="mat-elevation-z8">
         <ng-container *ngIf="dataSource.data.length > 0; else loader">
           <table mat-table [dataSource]="dataSource" matSort>
-            <!-- ID Column -->
-            <ng-container matColumnDef="title">
+            <!-- Title Column -->
+            <ng-container matColumnDef="Title">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
               <td mat-cell *matCellDef="let row">{{ row.title }}</td>
             </ng-container>
 
-            <!-- Progress Column -->
+            <!-- Statues Column -->
             <ng-container matColumnDef="Statues">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
               <td mat-cell *matCellDef="let row">
-                <span class="status">Public</span>
+                <ng-container [ngSwitch]="row.status">
+                  <span *ngSwitchCase="status.toDo" class="status to-do">{{
+                    row.status
+                  }}</span>
+                  <span
+                    *ngSwitchCase="status.inProgress"
+                    class="status in-progress"
+                    >{{ row.status }}</span
+                  >
+                  <span *ngSwitchCase="status.done" class="status done">{{
+                    row.status
+                  }}</span>
+                  <span *ngSwitchDefault class="status">{{ row.status }}</span>
+                </ng-container>
               </td>
             </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="Num Users">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                Num Users
-              </th>
-              <td mat-cell *matCellDef="let row">{{ row.numUsers ?? 0 }}</td>
-            </ng-container>
-
-            <!-- Fruit Column -->
-            <ng-container matColumnDef="Num Tasks">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                Num Tasks
-              </th>
+            <!-- User Column -->
+            <ng-container matColumnDef="User">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
               <td mat-cell *matCellDef="let row">
-                {{ row.tasks?.length || 0 }}
+                {{ row.user?.name || "N/A" }}
               </td>
             </ng-container>
+
+            <!-- Project Column -->
+            <ng-container matColumnDef="Project">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
+              <td mat-cell *matCellDef="let row">
+                {{ row.project?.name || "N/A" }}
+              </td>
+            </ng-container>
+
             <!-- Date Created Column -->
             <ng-container matColumnDef="Date Created">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -89,6 +101,7 @@
                 {{ row.creationDate | date: "short" }}
               </td>
             </ng-container>
+
             <!-- Actions Column -->
             <ng-container matColumnDef="Actions">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>

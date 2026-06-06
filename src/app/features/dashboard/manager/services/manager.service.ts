@@ -3,7 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   IProject,
+  Iproject,
   IProjectPayload,
+  IResponse,
+  ITask,
   ITasksCount,
   IUserscount,
 } from '../interfaces/manger.interface';
@@ -30,5 +33,28 @@ export class ManagerService {
 
   updateproject(id: number, data: IProjectPayload): Observable<IProject> {
     return this.http.put<IProject>(`Project/${id}`, data);
+  }
+
+  getProjectList(
+    pageNumber: number,
+    pageSize: number,
+    searchQuery?: string,
+  ): Observable<IResponse<Iproject>> {
+    return this.http.get<IResponse<Iproject>>('Project', {
+      params: {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        searchQuery: searchQuery ? searchQuery : '',
+      },
+    });
+  }
+  // get tasks for counting users in each project
+  getTasks(pageNumber: number, pageSize: number): Observable<IResponse<ITask>> {
+    return this.http.get<IResponse<ITask>>('Task/manager', {
+      params: {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+      },
+    });
   }
 }

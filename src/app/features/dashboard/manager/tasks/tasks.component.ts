@@ -8,36 +8,36 @@ import {
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Iproject, IResponse, ITask } from '../interfaces/manger.interface';
 import {
-  catchError,
+  Subject,
   debounceTime,
   distinctUntilChanged,
-  finalize,
+  catchError,
+  of,
   forkJoin,
   map,
-  of,
-  Subject,
+  finalize,
 } from 'rxjs';
+import { IResponse, ITask, Iproject } from '../interfaces/manger.interface';
 import { ManagerService } from '../services/manager.service';
-
-type ProjectRow = Iproject & { numUsers: number };
+import { StatusEnum } from 'src/app/core/enums/general.enum';
+type TaskRow = ITask & { numUsers: number };
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss'],
+  selector: 'app-tasks',
+  templateUrl: './tasks.component.html',
+  styleUrls: ['./tasks.component.scss'],
 })
-export class ProjectsComponent implements AfterViewInit, OnInit {
+export class TasksComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
-    'title',
+    'Title',
     'Statues',
-    'Num Users',
-    'Num Tasks',
+    'User',
+    'Project',
     'Date Created',
     'Actions',
   ];
-  dataSource: MatTableDataSource<ProjectRow> = new MatTableDataSource();
+  dataSource: MatTableDataSource<TaskRow> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
 
@@ -49,8 +49,8 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   length: number = 0;
   searchQuery: string = '';
   isLoading: boolean = false;
+  status = StatusEnum;
 
-  // constructor(private _managerService: ManagerService) {}
   ngOnInit(): void {
     this.fetchData();
     this.searchSubject
@@ -100,14 +100,14 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
               ...p,
               numUsers: counts.get(p.id) ?? 0,
             })),
-          } as IResponse<ProjectRow>;
+          } as IResponse<TaskRow>;
         }),
         finalize(() => {
           this.isLoading = false;
         }),
       )
       .subscribe({
-        next: (res: IResponse<ProjectRow>) => {
+        next: (res: IResponse<TaskRow>) => {
           this.length = res.totalNumberOfRecords;
           this.pageSize = res.pageSize;
           this.pageNumber = res.pageNumber;

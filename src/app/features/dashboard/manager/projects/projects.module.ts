@@ -3,16 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsComponent } from './projects.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ProjectsComponent],
-  imports: [
-    CommonModule,
-    ProjectsRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
+  imports: [SharedModule, CommonModule, ProjectsRoutingModule],
 })
 export class ProjectsModule {}

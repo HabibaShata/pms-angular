@@ -28,6 +28,15 @@
         padding: 6px 14px;
         color: #fff;
       }
+      .status.to-do {
+        background-color: #e4e1f5;
+      }
+      .status.in-progress {
+        background-color: #ef9b28a3;
+      }
+      .status.done {
+        background-color: #009247;
+      }
     }
 
     ::ng-deep {
