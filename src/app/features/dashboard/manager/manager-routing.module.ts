@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
 
 const routes: Routes = [
+  { path: '', component: ManagerComponent },
   {
-    path: '',
-    component: ManagerComponent,
+    path: 'projects',
+    loadChildren: () =>
+      import('./projects/projects.module').then((m) => m.ProjectsModule),
   },
-  { path: 'projects', component: ProjectListComponent },
 ];
 
 @NgModule({
