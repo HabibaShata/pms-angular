@@ -8,6 +8,7 @@
         <button
           class="main-btn d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
           type="submit"
+          [routerLink]="['add']"
         >
           <span class="d-flex align-items-center gap-1">
             <mat-icon
@@ -105,7 +106,7 @@
                     <mat-icon>visibility</mat-icon>
                     <span>View</span>
                   </button>
-                  <button mat-menu-item>
+                  <button mat-menu-item [routerLink]="['edit', row.id]">
                     <mat-icon>edit_square</mat-icon>
                     <span>Edit</span>
                   </button>

@@ -3,7 +3,7 @@ export enum RoleEnum {
   Employee = 'Employee',
 }
 export enum StatusEnum {
-  toDo = 'to do',
-  inProgress = 'in progress',
-  done = 'done',
+  ToDo = 'ToDo',
+  InProgress = 'InProgress',
+  Done = 'Done',
 }
