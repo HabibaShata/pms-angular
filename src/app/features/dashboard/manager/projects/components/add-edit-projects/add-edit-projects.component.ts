@@ -2,8 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ManagerService } from '../../services/manager.service';
-import { IProject, IProjectPayload } from '../../interfaces/manger.interface';
+import {
+  IProject,
+  IProjectPayload,
+} from '../../../interfaces/manger.interface';
+import { ManagerService } from '../../../services/manager.service';
 
 @Component({
   selector: 'app-add-edit-projects',

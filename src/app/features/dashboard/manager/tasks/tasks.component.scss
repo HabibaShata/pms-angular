@@ -37,10 +37,13 @@
       .status.done {
         background-color: #009247;
       }
+      .custom-icon-color {
+        color: #009247 !important;
+      }
     }
 
     ::ng-deep {
-      .mat-mdc-text-field-wrapper {
+      .project-list-table-header .mat-mdc-text-field-wrapper {
         border: 0.7px solid #26385a40;
         border-radius: 46px;
       }
@@ -55,6 +58,18 @@
       .mat-sort-header-arrow {
         color: #fff;
       }
+      .mdc-floating-label.mat-mdc-floating-label {
+        align-items: center;
+        font-size: 18px;
+        display: flex;
+        gap: 8px;
+      }
+      .mat-icon {
+        fill: none;
+      }
+    }
+    :host ::ng-deep .mat-mdc-menu-item .mat-icon-no-color {
+      color: #009247 !important;
     }
   }
 }
