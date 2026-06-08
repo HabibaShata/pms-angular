@@ -1,0 +1,34 @@
+<h2 mat-dialog-title class="delete-title">
+  Confirm Delete
+</h2>
+
+<mat-dialog-content class="delete-content">
+
+  <div class="warning-box">
+
+    <mat-icon class="warning-icon">warning</mat-icon>
+
+    <p class="message">
+      Are you sure you want to delete
+      <strong>{{ data.name }}</strong>?
+    </p>
+
+    <p class="sub-message">
+      This action cannot be undone.
+    </p>
+
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="actions">
+
+  <button mat-button (click)="onCancel()">
+    Cancel
+  </button>
+
+  <button mat-raised-button color="warn" (click)="onConfirm()">
+    Delete
+  </button>
+
+</mat-dialog-actions>
