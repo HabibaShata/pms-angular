@@ -1,0 +1,86 @@
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+.delete-title {
+  background: #ff7f7f;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 16px 24px;
+  margin: 0;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.delete-content {
+  min-width: 450px;
+  padding: 30px 24px 10px !important;
+}
+
+.warning-box {
+  text-align: center;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.warning-icon {
+  font-size: 60px !important;
+  width: 60px !important;
+  height: 60px !important;
+  color: #ff6b6b;
+}
+
+.message {
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.sub-message {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 24px 20px !important;
+}
+
+.cancel-btn {
+  background: #f3f4f6 !important;
+  color: #555 !important;
+  min-width: 140px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.delete-btn {
+  background: #ff7f7f !important;
+  color: white !important;
+  min-width: 140px;
+  height: 48px;
+  border-radius: 8px;
+}

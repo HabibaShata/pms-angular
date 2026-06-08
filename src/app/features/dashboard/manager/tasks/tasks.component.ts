@@ -12,7 +12,10 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { IResponse, ITask } from '../interfaces/manger.interface';
 import { ManagerService } from '../services/manager.service';
 import { StatusEnum } from 'src/app/core/enums/general.enum';
-import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewDialogComponent } from '../../../../shared/components/view-dialog/view-dialog.component';
+import { DeleteDialogComponent } from '../../../../shared/components/delete-dialog/delete-dialog.component';
+type TaskRow = ITask & { numUsers: number };
 
 @Component({
   selector: 'app-tasks',
@@ -41,6 +44,8 @@ export class TasksComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<ITask> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
+  private dialog = inject(MatDialog);
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -115,4 +120,58 @@ export class TasksComponent implements AfterViewInit, OnInit {
     this.pageSize = event.pageSize;
     this.fetchData();
   }
+  // من الـ tasks response، استخرجي unique employees per project
+  getNumUsersPerProject(tasks: any[]): Map<number, number> {
+    const projectEmployeeMap = new Map<number, Set<number>>();
+
+    tasks.forEach((task) => {
+      if (task.employee && task.project) {
+        const projectId = task.project.id;
+
+        if (!projectEmployeeMap.has(projectId)) {
+          projectEmployeeMap.set(projectId, new Set());
+        }
+        projectEmployeeMap.get(projectId)!.add(task.employee.id);
+      }
+    });
+
+    // حوّلي لـ Map<projectId, count>
+    const result = new Map<number, number>();
+    projectEmployeeMap.forEach((employeeSet, projectId) => {
+      result.set(projectId, employeeSet.size);
+    });
+
+    return result;
+  }
+
+// view-task
+  openViewTaskDialog(item: ITask) {
+  this.dialog.open(ViewDialogComponent, {
+    data: {
+      type: 'task',
+      item: item
+    },
+    width: '600px'
+  });
+}
+
+
+//delete-task
+openDeleteTaskDialog(item: ITask) {
+  const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    width: '550px',
+    disableClose: true,
+    data: {
+      name: item.title
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Delete task confirmed', item.id);
+
+    
+    }
+  });
+}
 }

@@ -11,6 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IProject, IResponse } from '../interfaces/manger.interface';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { ManagerService } from '../services/manager.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewDialogComponent } from '../../../../shared/components/view-dialog/view-dialog.component';
+import { DeleteDialogComponent } from '../../../../shared/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-projects',
@@ -28,6 +31,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<IProject> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
+  private dialog = inject(MatDialog);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -100,4 +104,33 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       }
     };
   }
+
+
+  //view-project
+  openViewDialog(item: Iproject) {
+  this.dialog.open(ViewDialogComponent, {
+    data: {
+      type: 'project',
+      item: item
+    },
+    width: '600px'
+  });
+}
+
+//delete-project
+openDeleteDialog(item: Iproject) {
+  const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    width: '500px',
+    disableClose: true,
+    data: {
+      name: item.title
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Delete confirmed', item.id);
+    }
+  });
+}
 }

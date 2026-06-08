@@ -136,19 +136,16 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item routerLink="task-detail">
-                    <mat-icon class="custom-icon-color">visibility</mat-icon>
+                  <button mat-menu-item (click)="openViewTaskDialog(row)">
+                    <mat-icon>visibility</mat-icon>
                     <span>View</span>
                   </button>
                   <button mat-menu-item [routerLink]="['edit', row.id]">
                     <mat-icon class="custom-icon-color">edit_square</mat-icon>
                     <span>Edit</span>
                   </button>
-                  <button mat-menu-item>
-                    <mat-icon
-                      class="custom-icon-color"
-                      fontIcon="delete"
-                    ></mat-icon>
+                  <button mat-menu-item (click)="openDeleteTaskDialog(row)">
+                    <mat-icon fontIcon="delete"></mat-icon>
                     <span>Delete</span>
                   </button>
                 </mat-menu>
