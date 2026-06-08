@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ManagerComponent,
   },
-  { path: 'projects', component: ProjectListComponent },
+  {
+    path: 'projects',
+    loadChildren: () =>
+      import('./projects/projects.module').then((m) => m.ProjectsModule),
+  },
+  {
+    path: 'tasks',
+    loadChildren: () =>
+      import('./tasks/tasks.module').then((m) => m.TasksModule),
+  },
 ];
 
 @NgModule({
