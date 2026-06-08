@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface DialogData {
   type: 'project' | 'task';
@@ -8,6 +10,12 @@ export interface DialogData {
 
 @Component({
   selector: 'app-view-dialog',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   templateUrl: './view-dialog.component.html',
   styleUrls: ['./view-dialog.component.scss']
 })

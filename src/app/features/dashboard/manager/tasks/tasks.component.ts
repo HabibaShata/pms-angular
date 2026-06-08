@@ -21,6 +21,9 @@ import {
 import { IResponse, ITask, Iproject } from '../interfaces/manger.interface';
 import { ManagerService } from '../services/manager.service';
 import { StatusEnum } from 'src/app/core/enums/general.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewDialogComponent } from '../../../../shared/components/view-dialog/view-dialog.component';
+import { DeleteDialogComponent } from '../../../../shared/components/delete-dialog/delete-dialog.component';
 type TaskRow = ITask & { numUsers: number };
 
 @Component({
@@ -40,6 +43,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<TaskRow> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
+  private dialog = inject(MatDialog);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -161,4 +165,35 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
     return result;
   }
+
+// view-task
+  openViewTaskDialog(item: ITask) {
+  this.dialog.open(ViewDialogComponent, {
+    data: {
+      type: 'task',
+      item: item
+    },
+    width: '600px'
+  });
+}
+
+
+//delete-task
+openDeleteTaskDialog(item: ITask) {
+  const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    width: '550px',
+    disableClose: true,
+    data: {
+      name: item.title
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Delete task confirmed', item.id);
+
+    
+    }
+  });
+}
 }
