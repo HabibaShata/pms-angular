@@ -1,5 +1,9 @@
 <!-- Overlay (ONLY mobile) -->
-<div class="sidebar-overlay" *ngIf="isMobileOpen" (click)="toggleMobileSidebar()"></div>
+<div
+  class="sidebar-overlay"
+  *ngIf="isMobileOpen"
+  (click)="toggleMobileSidebar()"
+></div>
 
 <div class="sidebar-header" *ngIf="isMobileOpen">
   <button (click)="toggleMobileSidebar()">
@@ -8,11 +12,15 @@
 </div>
 
 <!---Start Of Sidebar--->
-<div class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
+<div
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+  [class.mobile-open]="isMobileOpen"
+>
   <div class="sidebar-content">
     <div class="header-sidebar-logo" *ngIf="isMobileOpen">
       <div class="logo-container">
-        <img src="../../../../../assets/images/Logo-PMS3.svg" alt="PMS Logo">
+        <img src="../../../../../assets/images/Logo-PMS3.svg" alt="PMS Logo" />
       </div>
     </div>
     <div class="sidebar-header d-none d-lg-flex">
@@ -21,11 +29,18 @@
       </button>
     </div>
     <!--Start Of Sidebar-->
-    <aside class="nav-section  d-flex flex-column h-100 justify-content-between">
+    <aside class="nav-section d-flex flex-column h-100 justify-content-between">
       <ul class="nav">
-        <ng-container *ngFor="let item of navMenu;let i = index;">
+        <ng-container *ngFor="let item of navMenu; let i = index">
           <li *ngIf="item.isActive" (click)="onNavItemClick()">
-            <a class="nav-item" [routerLink]="item.routerNavigate" routerLinkActive="active">
+            <a
+              class="nav-item"
+              [routerLink]="item.routerNavigate"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{
+                exact: item.label === 'Home',
+              }"
+            >
               <!--[class.active]="isHomeActive(item)"-->
               <span class="span-hover">
                 <i class="nav-icon me-2" [ngClass]="item.icon"></i>

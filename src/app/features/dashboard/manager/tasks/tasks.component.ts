@@ -8,17 +8,8 @@ import {
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {
-  Subject,
-  debounceTime,
-  distinctUntilChanged,
-  catchError,
-  of,
-  forkJoin,
-  map,
-  finalize,
-} from 'rxjs';
-import { IResponse, ITask, Iproject } from '../interfaces/manger.interface';
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { IResponse, ITask } from '../interfaces/manger.interface';
 import { ManagerService } from '../services/manager.service';
 import { StatusEnum } from 'src/app/core/enums/general.enum';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,14 +24,24 @@ type TaskRow = ITask & { numUsers: number };
 })
 export class TasksComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
-    'Title',
-    'Statues',
-    'User',
-    'Project',
-    'Date Created',
-    'Actions',
+    'title',
+    'status',
+    'user',
+    'project',
+    'creationDate',
+    'actions',
   ];
-  dataSource: MatTableDataSource<TaskRow> = new MatTableDataSource();
+  toppings = new FormControl('');
+
+  toppingList: string[] = [
+    'Extra cheese',
+    'Mushroom',
+    'Onion',
+    'Pepperoni',
+    'Sausage',
+    'Tomato',
+  ];
+  dataSource: MatTableDataSource<ITask> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
@@ -56,6 +57,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
   status = StatusEnum;
 
   ngOnInit(): void {
+    this.configureDataSource();
     this.fetchData();
     this.searchSubject
       .pipe(debounceTime(300), distinctUntilChanged())
@@ -65,63 +67,39 @@ export class TasksComponent implements AfterViewInit, OnInit {
         this.fetchData();
       });
   }
+
+  private configureDataSource(): void {
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'user':
+          return item.employee?.userName ?? '';
+        case 'project':
+          return item.project?.title ?? '';
+        default:
+          return (item as any)[property] ?? '';
+      }
+    };
+  }
   fetchData() {
     this.isLoading = true;
 
-    const tasks$ = this._managerService.getTasks(1, 1000).pipe(
-      catchError((err) => {
-        console.error('Failed to load tasks for projects', err);
-        return of({
-          pageNumber: 1,
-          pageSize: 0,
-          data: [],
-          totalNumberOfRecords: 0,
-          totalNumberOfPages: 0,
-        } as IResponse<ITask>);
-      }),
-    );
-
-    forkJoin({
-      projects: this._managerService.getProjectList(
-        this.pageNumber,
-        this.pageSize,
-        this.searchQuery,
-      ),
-      tasks: tasks$,
-    })
-      .pipe(
-        map(({ projects, tasks }) => {
-          const projectIds = (projects.data || []).map((p: any) => p.id);
-          const taskData = tasks?.data || [];
-          const filteredTasks = taskData.filter(
-            (t: any) => t?.project && projectIds.includes(t.project.id),
-          );
-          const counts = this.getNumUsersPerProject(filteredTasks);
-
-          return {
-            ...projects,
-            data: (projects.data as Iproject[]).map((p: Iproject) => ({
-              ...p,
-              numUsers: counts.get(p.id) ?? 0,
-            })),
-          } as IResponse<TaskRow>;
-        }),
-        finalize(() => {
-          this.isLoading = false;
-        }),
-      )
-      .subscribe({
-        next: (res: IResponse<TaskRow>) => {
-          this.length = res.totalNumberOfRecords;
-          this.pageSize = res.pageSize;
-          this.pageNumber = res.pageNumber;
-          this.dataSource.data = res.data;
-        },
-        error: (err: any) => {
-          console.error('Failed to load project data', err);
-          this.isLoading = false;
-        },
-      });
+    this._managerService.getTasks(this.pageNumber, this.pageSize).subscribe({
+      next: (res: IResponse<ITask>) => {
+        console.log('Tasks response:', res.data);
+        this.dataSource.data = res.data;
+        setTimeout(() => {
+          if (this.sort) {
+            this.dataSource.sort = this.sort;
+          }
+        });
+        this.length = res.totalNumberOfRecords;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Failed to load tasks', err);
+        this.isLoading = false;
+      },
+    });
   }
 
   ngAfterViewInit() {
