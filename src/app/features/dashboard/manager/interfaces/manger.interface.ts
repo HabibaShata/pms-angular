@@ -20,7 +20,7 @@ export interface IProject {
   description: string;
   creationDate: string;
   modificationDate: string;
-  task: any[];
+  task: unknown[];
   manager: IManager;
 }
 export interface IManager {
@@ -45,15 +45,6 @@ export interface IResponse<T = unknown> {
   totalNumberOfPages: number;
 }
 
-export interface Iproject {
-  id: number;
-  title: string;
-  description: string;
-  creationDate?: string;
-  modificationDate?: string;
-  manager?: IManager;
-}
-
 export interface IManager {
   id: number;
   userName: string;
@@ -76,7 +67,7 @@ export interface ITask {
   status: StatusEnum;
   creationDate: string;
   modificationDate: string;
-  project: Iproject;
+  project: IProject;
   employee: IPerson;
 }
 

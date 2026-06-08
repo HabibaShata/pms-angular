@@ -1,4 +1,3 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   AfterViewInit,
   Component,
@@ -7,10 +6,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { IResponse, ITask, Iproject } from '../interfaces/manger.interface';
+import { IResponse, ITask } from '../interfaces/manger.interface';
 import { ManagerService } from '../services/manager.service';
 import { StatusEnum } from 'src/app/core/enums/general.enum';
 import { FormControl } from '@angular/forms';
