@@ -54,15 +54,19 @@
 
         <mat-divider></mat-divider>
 
-        <button mat-menu-item routerLink="/dashboard/profile">
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
-        </button>
+        <div routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <button mat-menu-item routerLink="/dashboard/profile">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+        </div>
 
-        <button mat-menu-item routerLink="/dashboard/change-password">
-          <mat-icon>key</mat-icon>
-          <span>Change Password</span>
-        </button>
+        <div routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <button mat-menu-item routerLink="/dashboard/change-password">
+            <mat-icon>key</mat-icon>
+            <span>Change Password</span>
+          </button>
+        </div>
 
         <mat-divider></mat-divider>
 
