@@ -10,6 +10,7 @@
 
 :host {
   ::ng-deep {
+
     /* Remove outline */
     .mdc-text-field--outlined {
       --mdc-outlined-text-field-outline-width: 0px;
@@ -106,8 +107,7 @@
     }
 
     /* Input color */
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled)
-      .mdc-text-field__input {
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
       color: var(--white-color) !important;
     }
   }

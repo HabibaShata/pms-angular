@@ -2,12 +2,15 @@
   &::after {
     background: url("/assets/images/Group1.png") no-repeat;
   }
+
   &::before {
     background: url("/assets/images/Group2.png") no-repeat;
   }
 }
+
 :host {
   ::ng-deep {
+
     /* Remove outline */
     .mdc-text-field--outlined {
       --mdc-outlined-text-field-outline-width: 0px;
@@ -17,6 +20,7 @@
       border-radius: 0;
       background: transparent;
     }
+
     /* Input sizing */
     .mat-mdc-form-field-infix,
     .mat-mdc-form-field,
@@ -25,6 +29,7 @@
       padding-top: 3px !important;
       padding-bottom: 0 !important;
     }
+
     /* Suffix icon */
     .mat-mdc-form-field-icon-suffix {
       padding: 0 !important;
@@ -32,12 +37,14 @@
       align-items: center;
       height: 33px !important;
     }
+
     .mat-mdc-icon-button.mat-mdc-button-base {
       width: 32px !important;
       height: 32px !important;
       padding: 4px !important;
       line-height: 1 !important;
     }
+
     .mat-icon {
       font-size: 18px !important;
       width: 18px !important;
@@ -45,9 +52,11 @@
       line-height: 18px !important;
       color: var(--white-color) !important;
     }
+
     /* Input text */
     .mat-mdc-input-element {
       font-size: 16px;
+
       &::placeholder {
         color: var(--white-color) !important;
         font-family: var(--Inter-font) !important;
@@ -58,25 +67,30 @@
         transition: opacity 0.2s ease;
       }
     }
+
     /* Hide placeholder on focus */
     .mat-mdc-form-field.mat-focused .mat-mdc-input-element::placeholder {
       opacity: 0;
     }
+
     /* Bottom border on focus */
     .mdc-text-field--focused {
       border-bottom: 2px solid var(--primary-color);
     }
+
     /* Error message */
     .mat-mdc-form-field-error {
       color: #ff4d4f !important;
       font-size: 13px;
       margin-top: 4px;
     }
+
     /* Remove extra bg */
     .mdc-text-field {
       padding: 0 !important;
       background-color: transparent !important;
     }
+
     /* Error/hint wrapper */
     .mat-mdc-form-field-hint-wrapper,
     .mat-mdc-form-field-error-wrapper {
@@ -85,21 +99,24 @@
       margin: 0 !important;
       padding: 0 !important;
     }
+
     /* Spinner */
     .mat-mdc-progress-spinner circle {
       stroke: #fff !important;
     }
+
     /* Input color */
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled)
-      .mdc-text-field__input {
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
       color: var(--white-color) !important;
     }
   }
 }
+
 /* Remove ripple */
 .mdc-line-ripple {
   display: none !important;
 }
+
 /*********** Responsive ***********/
 @media screen and (min-width: 1200px) {
   .auth-card {

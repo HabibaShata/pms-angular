@@ -1,1 +1,57 @@
-<p>employee works!</p>
+<section class="px-3">
+
+  <!-- Home Header Section -->
+  <app-home-header></app-home-header>
+
+  <!-- ===================== STATISTICS SECTION START ===================== -->
+  <section class="statics-section py-5">
+    <div class="container">
+      <div class="row g-4" *ngIf="tasksCount; else loader">
+        <!-- ===================== TASKS STATISTICS (LEFT SIDE) ===================== -->
+        <div class="col-lg-6">
+          <div class="col-content">
+            <!-- Tasks Section Header -->
+            <app-statics-header [title]="'tasks'"
+              [description]="'Here is an overview of your projects and tasks'"></app-statics-header>
+
+            <!-- Tasks Stats Cards + Chart -->
+            <div>
+              <!-- Tasks Summary Cards -->
+              <div class="d-flex flex-wrap gap-3 px-3 stats-cards-container">
+                <!-- In Progress Tasks -->
+                <app-statics-card title="Progress" [value]="tasksCount.inProgress"
+                  icon="../../../../assets/images/progress-card-icon.svg" bgColor="#E5E6F4" imageBgColor="#CFD1EC">
+                </app-statics-card>
+
+                <!-- To Do Tasks -->
+                <app-statics-card title="Tasks Number" [value]="tasksCount.toDo"
+                  icon="../../../../assets/images/tasks-card-icon.svg" bgColor="#F4F4E5" imageBgColor="#E4E4BC">
+                </app-statics-card>
+
+                <!-- Done Tasks -->
+                <app-statics-card title="Projects Number" [value]="tasksCount.done"
+                  icon="../../../../assets/images/project-card-icon.svg" bgColor="#F4E5ED" imageBgColor="#E7C3D7">
+                </app-statics-card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== USERS STATISTICS (RIGHT SIDE) ===================== -->
+        <div class="col-lg-6">
+          <div class="col-content">
+            <!-- Tasks Distribution Donut Chart -->
+            <app-users-chart [series]="tasksCount ? tasksSeries : []" [labels]="['In Progress', 'To Do', 'Done']"
+              [colors]="['#80CAFF', '#FFD966', '#85E0A3']">
+            </app-users-chart>
+          </div>
+        </div>
+      </div>
+      <!-- Loader (Shown when users && Tasks data is not yet loaded) -->
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
+    </div>
+  </section>
+  <!-- ===================== STATISTICS SECTION END ===================== -->
+</section>

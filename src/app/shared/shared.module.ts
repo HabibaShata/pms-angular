@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthHeaderComponent } from './components/auth-header/auth-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { HeaderComponent } from './components/Layout/header/header.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,6 +27,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const shared = [
   CommonModule,
@@ -53,7 +54,6 @@ const shared = [
   declarations: [
     NotFoundPageComponent,
     AuthHeaderComponent,
-    ChangePasswordComponent,
     HeaderComponent,
     SidebarComponent,
     StaticsCardComponent,
@@ -62,13 +62,14 @@ const shared = [
     LoaderComponent,
     EmptyStatusComponent,
     UsersChartComponent,
+    ChangePasswordComponent,
+    ProfileComponent,
   ],
 
   imports: [shared, RouterModule],
   exports: [
     shared,
     AuthHeaderComponent,
-    ChangePasswordComponent,
     HeaderComponent,
     SidebarComponent,
     StaticsCardComponent,
@@ -77,6 +78,8 @@ const shared = [
     LoaderComponent,
     EmptyStatusComponent,
     UsersChartComponent,
+    ChangePasswordComponent,
+    ProfileComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

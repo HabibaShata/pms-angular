@@ -6,9 +6,9 @@ import {
   IProjectPayload,
   IResponse,
   ITask,
-  ITasksCount,
   IUserscount,
 } from '../interfaces/manger.interface';
+import { ITasksCount } from 'src/app/shared/Interfaces/general';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +16,12 @@ import {
 export class ManagerService {
   private http = inject(HttpClient);
 
+  //Get Users Statics for Manager
   getUsersCount(): Observable<IUserscount> {
     return this.http.get<IUserscount>('Users/count');
   }
 
-  getTasksCount(): Observable<ITasksCount> {
-    return this.http.get<ITasksCount>('Task/count');
-  }
+  // Project Services
   createProject(data: IProjectPayload): Observable<IProject> {
     return this.http.post<IProject>('Project', data);
   }
@@ -48,6 +47,7 @@ export class ManagerService {
     });
   }
 
+  //Tasks Services
   getTasks(pageNumber: number, pageSize: number): Observable<IResponse<ITask>> {
     return this.http.get<IResponse<ITask>>('Task/manager', {
       params: {
