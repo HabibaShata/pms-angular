@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import {
   IProject,
   IProjectPayload,
-} from '../../../interfaces/manger.interface';
-import { ManagerService } from '../../../services/manager.service';
+} from '../../../../interfaces/manger.interface';
+import { ManagerService } from '../../../../services/manager.service';
 
 @Component({
   selector: 'app-add-edit-projects',

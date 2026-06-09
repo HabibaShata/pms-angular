@@ -1,17 +1,16 @@
 .auth-container {
   &::after {
-    background: url("../../../../../assets/images/forget-pass-after.png")
-      no-repeat;
+    background: url("../../../../../assets/images/forget-pass-after.png") no-repeat;
   }
 
   &::before {
-    background: url("../../../../../assets/images/forget-pass-before.png")
-      no-repeat;
+    background: url("../../../../../assets/images/forget-pass-before.png") no-repeat;
   }
 }
 
 :host {
   ::ng-deep {
+
     /* Remove outline */
     .mdc-text-field--outlined {
       --mdc-outlined-text-field-outline-width: 0px;
@@ -109,8 +108,7 @@
     }
 
     /* Input color */
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled)
-      .mdc-text-field__input {
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
       color: var(--white-color) !important;
     }
   }

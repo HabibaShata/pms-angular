@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 import { managerGuard } from 'src/app/core/guards/manager.guard';
 import { redirectGuard } from 'src/app/core/guards/redirect.guard';
+import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -24,10 +25,15 @@ const routes: Routes = [
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)
       },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        title: 'Profile',
+      },
     ],
   },
   {
-    path: 'profile/change-password',
+    path: 'change-password',
     component: ChangePasswordComponent,
     title: 'Change Password',
   },

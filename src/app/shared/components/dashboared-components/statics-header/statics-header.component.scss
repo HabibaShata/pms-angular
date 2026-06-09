@@ -1,7 +1,8 @@
-.statics-header{
+.statics-header {
   padding-left: 20px;
   position: relative;
-  &::before{
+
+  &::before {
     content: "";
     position: absolute;
     top: 0;
@@ -10,16 +11,20 @@
     height: 40px;
     background-color: var(--primary-color);
   }
-  h2,p{
+
+  h2,
+  p {
     font-family: var(--Inter-font);
   }
-  h2{
+
+  h2 {
     font-weight: 500;
     font-size: .9rem;
     color: var(--dark-color);
     margin-bottom: 3px;
   }
-  p{
+
+  p {
     font-weight: 400;
     font-size: 14px;
     color: var(--paragraph-color);

@@ -5,11 +5,6 @@ export interface IUserscount {
   deactivatedEmployeeCount: number;
 }
 
-export interface ITasksCount {
-  toDo: number;
-  inProgress: number;
-  done: number;
-}
 export interface IProjectPayload {
   title: string;
   description: string;

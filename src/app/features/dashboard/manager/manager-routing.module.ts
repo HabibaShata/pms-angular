@@ -10,17 +10,18 @@ const routes: Routes = [
   {
     path: 'projects',
     loadChildren: () =>
-      import('./projects/projects.module').then((m) => m.ProjectsModule),
+      import('./modules/projects/projects.module').then((m) => m.ProjectsModule),
   },
   {
     path: 'tasks',
-    loadChildren: () =>
-      import('./tasks/tasks.module').then((m) => m.TasksModule),
+    loadChildren: () => import('./modules/tasks/tasks.module').then((m) => m.TasksModule),
   },
+  { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule) },
+  { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule) },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ManagerRoutingModule {}
+export class ManagerRoutingModule { }

@@ -9,12 +9,16 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { IResponse, ITask } from '../interfaces/manger.interface';
-import { ManagerService } from '../services/manager.service';
+
 import { StatusEnum } from 'src/app/core/enums/general.enum';
 import { MatDialog } from '@angular/material/dialog';
-import { ViewDialogComponent } from '../../../../shared/components/view-dialog/view-dialog.component';
-import { DeleteDialogComponent } from '../../../../shared/components/delete-dialog/delete-dialog.component';
+
+import { FormControl } from '@angular/forms';
+import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
+import { ITask, IResponse } from '../../interfaces/manger.interface';
+import { ManagerService } from '../../services/manager.service';
+
 type TaskRow = ITask & { numUsers: number };
 
 @Component({
@@ -170,7 +174,7 @@ openDeleteTaskDialog(item: ITask) {
     if (result) {
       console.log('Delete task confirmed', item.id);
 
-    
+
     }
   });
 }
