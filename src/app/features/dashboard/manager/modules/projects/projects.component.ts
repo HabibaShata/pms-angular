@@ -28,7 +28,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     'Date Created',
     'Actions',
   ];
-  dataSource: MatTableDataSource<IProject> = new MatTableDataSource();
+  dataSource: MatTableDataSource<IProject> = new MatTableDataSource<IProject>([]);
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
@@ -60,7 +60,6 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       .getProjectList(this.pageNumber, this.pageSize)
       .subscribe({
         next: (res: IResponse<IProject>) => {
-          console.log('projects response:', res.data[1].task.length);
           this.dataSource.data = res.data;
 
           setTimeout(() => {

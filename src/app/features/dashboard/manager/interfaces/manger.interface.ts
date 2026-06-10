@@ -80,3 +80,14 @@ export interface IPerson {
   creationDate: string;
   modificationDate: string;
 }
+
+export interface User {
+  id: number;
+  userName: string;
+  imagePath: string | null;
+  email: string;
+  country: string;
+  phoneNumber: string;
+  isActivated: boolean;
+  task: ITask[];
+}
