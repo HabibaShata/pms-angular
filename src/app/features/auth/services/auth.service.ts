@@ -33,6 +33,10 @@ export class AuthService {
     }
   }
 
+    updateCurrentUserData(data:FormData): Observable<any> {
+    return this.http.put<any>('Users', data);
+  }
+
   //====== get logged person Data ======
   getCurrentUserData(): Observable<ICurrentUser> {
     return this.http.get<ICurrentUser>('Users/currentUser');

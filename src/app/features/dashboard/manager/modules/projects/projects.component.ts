@@ -28,7 +28,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     'Date Created',
     'Actions',
   ];
-  dataSource: MatTableDataSource<IProject> = new MatTableDataSource();
+  dataSource: MatTableDataSource<IProject> = new MatTableDataSource<IProject>([]);
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
@@ -60,7 +60,6 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       .getProjectList(this.pageNumber, this.pageSize)
       .subscribe({
         next: (res: IResponse<IProject>) => {
-          console.log('projects response:', res.data[1].task.length);
           this.dataSource.data = res.data;
 
           setTimeout(() => {
@@ -105,15 +104,14 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     };
   }
 
-
   //view-project
   openViewDialog(item: IProject) {
     this.dialog.open(ViewDialogComponent, {
       data: {
         type: 'project',
-        item: item
+        item: item,
       },
-      width: '600px'
+      width: '600px',
     });
   }
 
@@ -123,11 +121,11 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       width: '500px',
       disableClose: true,
       data: {
-        name: item.title
-      }
+        name: item.title,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log('Delete confirmed', item.id);
       }

@@ -5,11 +5,6 @@
     padding: 20px;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1490196078);
     background: #fff;
-    h3 {
-      font-family: var(--Inter-font);
-      color: #4f4f4f;
-      font-weight: 400;
-    }
   }
   .project-list-table-container {
     padding: 20px;
@@ -21,7 +16,6 @@
       .mat-mdc-form-field {
         font-size: 14px;
         margin: 10px;
-        width: 220px;
       }
 
       .odd-row {
@@ -59,9 +53,10 @@
         padding-inline: 20px !important;
       }
       .project-list-table-header .mdc-text-field {
-        padding: 0 !important;
-        height: 43px;
-        font-size: 17px;
+        padding: 5 !important;
+      }
+      .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 20px;
       }
     }
   }
