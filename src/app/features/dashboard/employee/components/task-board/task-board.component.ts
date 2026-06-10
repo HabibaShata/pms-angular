@@ -22,6 +22,7 @@ export class TaskBoardComponent implements OnInit {
   tasksDone: ITask[] = [];
   taskId!: number;
 
+  isLoading: boolean = false;
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
   ngOnInit(): void {
     this.fetchToDoTasks();
@@ -29,37 +30,46 @@ export class TaskBoardComponent implements OnInit {
     this.fetchDoneTasks();
   }
   fetchToDoTasks() {
+    this.isLoading = true;
     this._EmployeeService
       .getTasksByStatus(this.status.ToDo, 1000, 1)
       .subscribe({
         next: (res: IResponse<ITask>) => {
           this.tasksToDo = res.data;
+          this.isLoading = false;
         },
         error: (err) => {
           console.log(err);
+          this.isLoading = false;
         },
       });
   }
   fetchInProgressTasks() {
+    this.isLoading = true;
     this._EmployeeService
       .getTasksByStatus(this.status.InProgress, 1000, 1)
       .subscribe({
         next: (res: IResponse<ITask>) => {
           this.tasksInprogress = res.data;
+          this.isLoading = false;
         },
         error: (err) => {
           console.log(err);
+          this.isLoading = false;
         },
       });
   }
   fetchDoneTasks() {
+    this.isLoading = true;
     this._EmployeeService
       .getTasksByStatus(this.status.Done, 1000, 1)
       .subscribe({
         next: (res: IResponse<ITask>) => {
           this.tasksDone = res.data;
+          this.isLoading = false;
         },
         error: (err) => {
+          this.isLoading = false;
           console.log('err', err);
         },
       });
