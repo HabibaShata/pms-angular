@@ -1,1 +1,90 @@
-<p>add-edit-task works!</p>
+<header class="page-header ms-5">
+  <button
+    class="back-btn"
+    type="button"
+    routerLink="/dashboard/manager/projects"
+  >
+    <span class="arrow">&lsaquo;</span> View All Tasks
+  </button>
+  <h1 class="page-title">
+    {{ taskId ? "Edit Your Task" : "Add a New Task" }}
+  </h1>
+</header>
+
+<div class="page-container">
+  <main class="project-card m-auto">
+    <form [formGroup]="tasksForm" (ngSubmit)="onSubmit()" class="project-form">
+      <div class="form-group">
+        <label for="project-title" class="form-label">Title</label>
+        <mat-form-field appearance="outline" class="custom-input">
+          <input
+            matInput
+            id="project-title"
+            formControlName="title"
+            placeholder="Name"
+            autocomplete="off"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <label for="project-desc" class="form-label">Description</label>
+        <mat-form-field appearance="outline" class="custom-input">
+          <textarea
+            matInput
+            id="project-desc"
+            formControlName="description"
+            rows="3"
+            placeholder="Description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="form-label">User</label>
+          <mat-form-field appearance="outline" class="custom-input">
+            <mat-select
+              formControlName="employeeId"
+              placeholder="No Users Selected"
+            >
+              <mat-option *ngFor="let user of usersList" [value]="user.id">
+                {{ user.userName || user.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group col">
+          <label class="form-label">Project</label>
+          <mat-form-field appearance="outline" class="custom-input">
+            <mat-select
+              placeholder="No Status Selected"
+              formControlName="projectId"
+            >
+              <mat-option
+                *ngFor="let project of projectsList"
+                [value]="project.id"
+              >
+                {{ project.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <footer class="form-actions">
+        <button
+          type="button"
+          class="btn-cancel"
+          routerLink="/dashboard/manager/projects"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn-save">
+          <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>
+          <span>Save</span>
+        </button>
+      </footer>
+    </form>
+  </main>
+</div>

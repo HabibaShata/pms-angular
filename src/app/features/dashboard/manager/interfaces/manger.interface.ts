@@ -18,20 +18,7 @@ export interface IProject {
   task: unknown[];
   manager: IManager;
 }
-export interface IManager {
-  id: number;
-  userName: string;
-  imagePath: string;
-  email: string;
-  password: string;
-  country: string;
-  phoneNumber: string;
-  verificationCode: string | null;
-  isVerified: boolean;
-  isActivated: boolean;
-  creationDate: string;
-  modificationDate: string;
-}
+
 export interface IResponse<T = unknown> {
   pageNumber: number;
   pageSize: number;
@@ -80,14 +67,9 @@ export interface IPerson {
   creationDate: string;
   modificationDate: string;
 }
-
-export interface User {
-  id: number;
-  userName: string;
-  imagePath: string | null;
-  email: string;
-  country: string;
-  phoneNumber: string;
-  isActivated: boolean;
-  task: ITask[];
+export interface ITaskPayload {
+  title: string;
+  description: string;
+  employeeId: number;
+  projectId: number;
 }
