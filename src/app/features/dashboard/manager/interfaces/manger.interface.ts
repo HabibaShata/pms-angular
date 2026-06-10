@@ -18,20 +18,7 @@ export interface IProject {
   task: unknown[];
   manager: IManager;
 }
-export interface IManager {
-  id: number;
-  userName: string;
-  imagePath: string;
-  email: string;
-  password: string;
-  country: string;
-  phoneNumber: string;
-  verificationCode: string | null;
-  isVerified: boolean;
-  isActivated: boolean;
-  creationDate: string;
-  modificationDate: string;
-}
+
 export interface IResponse<T = unknown> {
   pageNumber: number;
   pageSize: number;

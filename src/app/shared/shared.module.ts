@@ -52,7 +52,7 @@ const shared = [
   MatPaginatorModule,
   MatSortModule,
   MatTableModule,
-  NgxFileDropModule
+  NgxFileDropModule,
   DragDropModule,
 ];
 

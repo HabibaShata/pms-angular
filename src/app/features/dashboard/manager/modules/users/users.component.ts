@@ -1,5 +1,9 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { IPerson, IResponse, User } from '../../interfaces/manger.interface';
+import {
+  IPerson,
+  IResponse,
+  IManager as User,
+} from '../../interfaces/manger.interface';
 import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -12,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
   displayedColumns: string[] = [
@@ -28,7 +32,7 @@ export class UsersComponent {
   private searchSubject = new Subject<string>();
   private _usersService = inject(UsersService);
   private dialog = inject(MatDialog);
-  private toaster = inject(ToastrService)
+  private toaster = inject(ToastrService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,7 +43,7 @@ export class UsersComponent {
   length: number = 0;
   searchQuery: string = '';
   isLoading: boolean = false;
-  usersData: User[] = []
+  usersData: User[] = [];
   searchText: string = '';
 
   ngOnInit(): void {
@@ -57,26 +61,24 @@ export class UsersComponent {
   fetchData() {
     this.isLoading = true;
 
-    this._usersService
-      .getUsers(this.pageNumber, this.pageSize)
-      .subscribe({
-        next: (res: IResponse<User>) => {
-          this.usersData = res.data;
-          this.dataSource.data = res.data;
+    this._usersService.getUsers(this.pageNumber, this.pageSize).subscribe({
+      next: (res: IResponse<User>) => {
+        this.usersData = res.data;
+        this.dataSource.data = res.data;
 
-          setTimeout(() => {
-            if (this.sort) {
-              this.dataSource.sort = this.sort;
-            }
-          });
-          this.length = res.totalNumberOfRecords;
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error('Failed to load projects', err);
-          this.isLoading = false;
-        },
-      });
+        setTimeout(() => {
+          if (this.sort) {
+            this.dataSource.sort = this.sort;
+          }
+        });
+        this.length = res.totalNumberOfRecords;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Failed to load projects', err);
+        this.isLoading = false;
+      },
+    });
   }
 
   onStatusFilter(value: 'all' | 'active' | 'inactive') {
@@ -86,7 +88,7 @@ export class UsersComponent {
 
   applyCombinedFilter() {
     // Always filter from the original full data
-    const filtered = this.usersData.filter(user => {
+    const filtered = this.usersData.filter((user) => {
       const matchesSearch =
         !this.searchText ||
         user.userName.toLowerCase().includes(this.searchText) ||
@@ -139,7 +141,7 @@ export class UsersComponent {
       },
       error: (err) => {
         console.error('Failed to update user status', err);
-      }
+      },
     });
   }
 
@@ -148,9 +150,9 @@ export class UsersComponent {
     this.dialog.open(ViewDialogComponent, {
       data: {
         type: 'employee',
-        item: item
+        item: item,
       },
-      width: '600px'
+      width: '600px',
     });
   }
 }

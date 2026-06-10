@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IPerson, IResponse, User } from '../../../interfaces/manger.interface';
+import {
+  IPerson,
+  IResponse,
+  IManager as User,
+} from '../../../interfaces/manger.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
   private http = inject(HttpClient);
@@ -18,9 +22,7 @@ export class UsersService {
     });
   }
 
-  getAndFilterLoggedUsers() {
-
-  }
+  getAndFilterLoggedUsers() {}
 
   AddManager(data: FormData): Observable<any> {
     return this.http.post<IResponse<IPerson>>('Users/create', data);
