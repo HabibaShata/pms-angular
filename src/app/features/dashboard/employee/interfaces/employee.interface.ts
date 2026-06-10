@@ -41,3 +41,12 @@ export interface IProject {
   creationDate: string;
   modificationDate: string;
 }
+
+export interface IResponseProjects {
+  id: number;
+  title: string;
+  description: string;
+  creationDate: string;
+  modificationDate: string;
+  task: ITask[];
+}

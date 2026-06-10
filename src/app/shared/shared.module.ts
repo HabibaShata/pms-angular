@@ -29,10 +29,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FileDropComponent } from './components/file-drop/file-drop.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const shared = [
   CommonModule,
@@ -54,6 +54,8 @@ const shared = [
   MatTableModule,
   NgxFileDropModule,
   DragDropModule,
+  NgxFileDropModule,
+  MatDialogModule,
 ];
 
 @NgModule({

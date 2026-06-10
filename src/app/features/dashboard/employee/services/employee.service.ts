@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StatusEnum } from 'src/app/core/enums/general.enum';
-import { IResponse, ITask } from '../interfaces/employee.interface';
+import {
+  IProject,
+  IResponse,
+  IResponseProjects,
+  ITask,
+} from '../interfaces/employee.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +33,19 @@ export class EmployeeService {
   changeTaskStatus(taskId: number, updatedStatus: StatusEnum) {
     return this.http.put<IResponse<ITask>>(`Task/${taskId}/change-status`, {
       status: updatedStatus,
+    });
+  }
+  //Project/employee?pageSize=1000&pageNumber=1
+  getEmployeeProjects(
+    searchName: string,
+    pageSize: number,
+    pageNumber: number,
+  ): Observable<IResponse<IResponseProjects>> {
+    return this.http.get<IResponse<IResponseProjects>>('Project/employee', {
+      params: {
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+      },
     });
   }
 }
