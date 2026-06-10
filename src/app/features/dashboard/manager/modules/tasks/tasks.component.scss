@@ -71,9 +71,15 @@
         padding-inline: 20px !important;
       }
       .project-list-table-header .mdc-text-field {
-        padding: 0 !important;
-        height: 43px;
-        font-size: 17px;
+        padding: 5 !important;
+        // height: 43px;
+        // font-size: 17px;
+      }
+      .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 20px;
+      }
+      .mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper {
+        transform: translateY(30%) !important;
       }
     }
   }

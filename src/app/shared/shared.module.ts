@@ -32,6 +32,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const shared = [
   CommonModule,
@@ -52,6 +53,7 @@ const shared = [
   MatSortModule,
   MatTableModule,
   NgxFileDropModule
+  DragDropModule,
 ];
 
 @NgModule({
@@ -88,4 +90,4 @@ const shared = [
     FileDropComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}
