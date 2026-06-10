@@ -24,8 +24,7 @@ $primary-palette: (
   A200: #fff3e0,
   A400: #ffcc80,
   A700: #ffb74d,
-  contrast: (
-    50: rgba(black, 0.87),
+  contrast: (50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
     300: rgba(black, 0.87),
@@ -54,15 +53,11 @@ $pms-angular-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$pms-angular-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $pms-angular-primary,
-      accent: $pms-angular-accent,
-      warn: $pms-angular-warn,
-    ),
-  )
-);
+$pms-angular-theme: mat.define-light-theme((color: (primary: $pms-angular-primary,
+        accent: $pms-angular-accent,
+        warn: $pms-angular-warn,
+      ),
+    ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -103,4 +98,17 @@ body {
 body {
   font-family: var(--Inter-font);
   background-color: #f5f5f5;
+}
+
+.mat-mdc-table,
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+  font-family: var(--Montserrat);
+}
+
+.table-header-title {
+  font-family: var(--Montserrat);
+  font-weight: 500;
+  font-size: 28px;
+  color: #4F4F4F;
 }

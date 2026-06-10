@@ -1,0 +1,33 @@
+/* styles.scss or component.scss */
+.img-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom:20px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 0px;
+  right: -15px;
+}
+::ng-deep .ngx-file-drop__content {
+  height: 70px !important;
+}
+
+::ng-deep .ngx-file-drop__drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  overflow: hidden;
+  height: auto !important;
+}
+
+::ng-deep .ngx-file-drop__drop-zone {
+  border: 2px dotted var(--primary-color) !important;
+  background: #fffff0 !important;
+  border-radius: 15px !important;
+}

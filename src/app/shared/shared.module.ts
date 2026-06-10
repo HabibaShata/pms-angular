@@ -29,6 +29,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FileDropComponent } from './components/file-drop/file-drop.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const shared = [
@@ -49,6 +52,7 @@ const shared = [
   MatPaginatorModule,
   MatSortModule,
   MatTableModule,
+  NgxFileDropModule
   DragDropModule,
 ];
 
@@ -66,6 +70,7 @@ const shared = [
     UsersChartComponent,
     ChangePasswordComponent,
     ProfileComponent,
+    FileDropComponent,
   ],
 
   imports: [shared, RouterModule],
@@ -82,6 +87,7 @@ const shared = [
     UsersChartComponent,
     ChangePasswordComponent,
     ProfileComponent,
+    FileDropComponent,
   ],
 })
 export class SharedModule {}

@@ -5,7 +5,19 @@
 <mat-dialog-content class="dialog-content">
 
   <!-- Header Card -->
-  <div class="top-card">
+  <div class="top-card" *ngIf="data.type === 'employee'">
+    <div class="title">
+      <span class="label">User Name:</span>
+      {{ data.item.userName }}
+    </div>
+
+    <div class="desc">
+      <span class="label">Email:</span>
+      {{ data.item.email }}
+    </div>
+  </div>
+
+  <div class="top-card" *ngIf="data.type !== 'employee'">
 
     <div class="title">
       <span class="label">Title:</span>
@@ -20,7 +32,10 @@
   </div>
 
   <!-- Info Grid  -->
-  <div class="info-grid">
+  <div [ngClass]="{
+    'info-grid': data.type === 'task' || data.type === 'project',
+    'd-flex flex-column flex-wrap gap-2': data.type === 'employee'
+  }">
 
     <!-- PROJECT  -->
     <ng-container *ngIf="data.type === 'project'">
@@ -62,15 +77,42 @@
 
     </ng-container>
 
+    <!-- EMPLOYEE -->
+    <ng-container *ngIf="data.type === 'employee'">
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="label">Country:</span>
+          <span class="value">{{ data.item.country }}</span>
+        </div>
+
+        <div class="info-card">
+          <span class="label">Phone Number</span>
+          <span class="value">{{ data.item.phoneNumber }}</span>
+        </div>
+
+        <div class="info-card">
+          <span class="label">Tasks</span>
+          <span class="value">{{ data.item.task?.length }}</span>
+        </div>
+
+        <div class="info-card">
+          <span class="label">Status</span>
+          <span class="value">
+            {{ data.item.isActivated ? 'Active' : 'Inactive' }}
+          </span>
+        </div>
+      </div>
+
+    </ng-container>
     <!-- COMMON -->
-    <div class="info-card">
+    <div class="info-card" *ngIf="data.type !== 'employee'">
       <span class="label">Created</span>
       <span class="value">
         {{ data.item.creationDate | date:'mediumDate' }}
       </span>
     </div>
 
-    <div class="info-card">
+    <div class="info-card" *ngIf="data.type !== 'employee'">
       <span class="label">Updated</span>
       <span class="value">
         {{ data.item.modificationDate | date:'mediumDate' }}
