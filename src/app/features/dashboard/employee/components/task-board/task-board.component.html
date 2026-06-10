@@ -1,0 +1,71 @@
+<section class="task-board-wrapper">
+  <div class="container-fluid task-board-header">
+    <div class="row d-flex align-items-center justify-content-between mx-auto">
+      <h3 class="col-md-9 m-0 p-0">Task Board</h3>
+    </div>
+  </div>
+  <div class="container-fluid my-5">
+    <div cdkDropListGroup class="row">
+      <div class="col-md-4">
+        <h5>To Do</h5>
+
+        <div
+          cdkDropList
+          [cdkDropListData]="tasksToDo"
+          class="task-list"
+          [id]="status.ToDo"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="task-item"
+            *ngFor="let item of tasksToDo"
+            cdkDrag
+            [cdkDragData]="item"
+          >
+            {{ item.title }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>In progress</h5>
+
+        <div
+          cdkDropList
+          [cdkDropListData]="tasksInprogress"
+          class="task-list"
+          [id]="status.InProgress"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="task-item"
+            *ngFor="let item of tasksInprogress"
+            cdkDrag
+            [cdkDragData]="item"
+          >
+            {{ item.title }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Done</h5>
+
+        <div
+          cdkDropList
+          [cdkDropListData]="tasksDone"
+          class="task-list"
+          [id]="status.Done"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="task-item"
+            *ngFor="let item of tasksDone"
+            cdkDrag
+            [cdkDragData]="item"
+          >
+            {{ item.title }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -29,6 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const shared = [
   CommonModule,
@@ -48,6 +49,7 @@ const shared = [
   MatPaginatorModule,
   MatSortModule,
   MatTableModule,
+  DragDropModule,
 ];
 
 @NgModule({
@@ -82,4 +84,4 @@ const shared = [
     ProfileComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

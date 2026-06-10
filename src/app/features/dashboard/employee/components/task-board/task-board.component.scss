@@ -1,0 +1,70 @@
+.task-board-wrapper {
+  height: 100vh;
+  background-color: #f5f5f5;
+  .task-board-header {
+    padding: 20px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1490196078);
+    background: #fff;
+    h3 {
+      font-family: var(--Inter-font);
+      color: #4f4f4f;
+      font-weight: 400;
+    }
+  }
+  h5 {
+    color: #4f4f4f;
+    font-family: var(--Montserrat);
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .task-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background-color: #315951e5;
+    border-radius: 15px;
+    overflow: hidden;
+    display: block;
+    padding: 50px 10px;
+    min-height: 500px;
+  }
+
+  .task-item {
+    padding: 20px 10px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: #ef9b28;
+    margin-block: 7px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow:
+      0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .example-box:last-child {
+    border: none;
+  }
+
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
