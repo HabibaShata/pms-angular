@@ -5,67 +5,73 @@
     </div>
   </div>
   <div class="container-fluid my-5">
-    <div cdkDropListGroup class="row">
-      <div class="col-md-4">
-        <h5>To Do</h5>
+    <!-- LOADING -->
+    <ng-container *ngIf="isLoading; else content">
+      <app-loader></app-loader>
+    </ng-container>
+    <ng-template #content>
+      <div cdkDropListGroup class="row">
+        <div class="col-md-4">
+          <h5>To Do</h5>
 
-        <div
-          cdkDropList
-          [cdkDropListData]="tasksToDo"
-          class="task-list"
-          [id]="status.ToDo"
-          (cdkDropListDropped)="drop($event)"
-        >
           <div
-            class="task-item"
-            *ngFor="let item of tasksToDo"
-            cdkDrag
-            [cdkDragData]="item"
+            cdkDropList
+            [cdkDropListData]="tasksToDo"
+            class="task-list"
+            [id]="status.ToDo"
+            (cdkDropListDropped)="drop($event)"
           >
-            {{ item.title }}
+            <div
+              class="task-item"
+              *ngFor="let item of tasksToDo"
+              cdkDrag
+              [cdkDragData]="item"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5>In progress</h5>
+
+          <div
+            cdkDropList
+            [cdkDropListData]="tasksInprogress"
+            class="task-list"
+            [id]="status.InProgress"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="task-item"
+              *ngFor="let item of tasksInprogress"
+              cdkDrag
+              [cdkDragData]="item"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5>Done</h5>
+
+          <div
+            cdkDropList
+            [cdkDropListData]="tasksDone"
+            class="task-list"
+            [id]="status.Done"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="task-item"
+              *ngFor="let item of tasksDone"
+              cdkDrag
+              [cdkDragData]="item"
+            >
+              {{ item.title }}
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <h5>In progress</h5>
-
-        <div
-          cdkDropList
-          [cdkDropListData]="tasksInprogress"
-          class="task-list"
-          [id]="status.InProgress"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div
-            class="task-item"
-            *ngFor="let item of tasksInprogress"
-            cdkDrag
-            [cdkDragData]="item"
-          >
-            {{ item.title }}
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h5>Done</h5>
-
-        <div
-          cdkDropList
-          [cdkDropListData]="tasksDone"
-          class="task-list"
-          [id]="status.Done"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div
-            class="task-item"
-            *ngFor="let item of tasksDone"
-            cdkDrag
-            [cdkDragData]="item"
-          >
-            {{ item.title }}
-          </div>
-        </div>
-      </div>
-    </div>
+    </ng-template>
   </div>
 </section>
