@@ -2,26 +2,33 @@
   <section class="row">
     <section class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
       <div class="mt-4">
-        <h1>My Profile</h1>
+        <h1>create new manager</h1>
       </div>
       <form [formGroup]="createManagerForm" (ngSubmit)="createManger()">
         <!-- User Name-->
         <div class="col-12 my-2">
           <label class="custom-label">User Name</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput type="text" placeholder="Enter user name" formControlName="userName" />
+            <input
+              matInput
+              type="text"
+              placeholder="Enter user name"
+              formControlName="userName"
+            />
 
-            <mat-error *ngIf="
-                  createManagerForm.get('userName')?.invalid &&
-                  (createManagerForm.get('userName')?.touched ||
-                    createManagerForm.get('userName')?.dirty)
-                ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('userName')?.invalid &&
+                (createManagerForm.get('userName')?.touched ||
+                  createManagerForm.get('userName')?.dirty)
+              "
+            >
               {{
-              createManagerForm.get("userName")?.errors?.["required"]
-              ? "User Name is required"
-              : createManagerForm.get("userName")?.errors?.["maxlength"]
-              ? "Maximum length is 8 characters"
-              : "User Name must contain letters followed by numbers"
+                createManagerForm.get("userName")?.errors?.["required"]
+                  ? "User Name is required"
+                  : createManagerForm.get("userName")?.errors?.["maxlength"]
+                    ? "Maximum length is 8 characters"
+                    : "User Name must contain letters followed by numbers"
               }}
             </mat-error>
           </mat-form-field>
@@ -31,16 +38,24 @@
         <div class="col-12 my-2">
           <label class="custom-label"> E-mail </label>
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput type="email" placeholder="Enter your E-mail" formControlName="email" required />
-            <mat-error *ngIf="
-                  createManagerForm.get('email')?.invalid &&
-                  (createManagerForm.get('email')?.touched ||
-                    createManagerForm.get('email')?.dirty)
-                ">
+            <input
+              matInput
+              type="email"
+              placeholder="Enter your E-mail"
+              formControlName="email"
+              required
+            />
+            <mat-error
+              *ngIf="
+                createManagerForm.get('email')?.invalid &&
+                (createManagerForm.get('email')?.touched ||
+                  createManagerForm.get('email')?.dirty)
+              "
+            >
               {{
-              createManagerForm.get("email")?.errors?.["required"]
-              ? "Email is required"
-              : "Please enter a valid email address"
+                createManagerForm.get("email")?.errors?.["required"]
+                  ? "Email is required"
+                  : "Please enter a valid email address"
               }}
             </mat-error>
           </mat-form-field>
@@ -50,13 +65,20 @@
         <div class="col-12 my-2">
           <label class="custom-label">Country</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput type="text" placeholder="Enter country" formControlName="country" />
+            <input
+              matInput
+              type="text"
+              placeholder="Enter country"
+              formControlName="country"
+            />
 
-            <mat-error *ngIf="
-                  createManagerForm.get('country')?.invalid &&
-                  (createManagerForm.get('country')?.touched ||
-                    createManagerForm.get('country')?.dirty)
-                ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('country')?.invalid &&
+                (createManagerForm.get('country')?.touched ||
+                  createManagerForm.get('country')?.dirty)
+              "
+            >
               Country is required
             </mat-error>
           </mat-form-field>
@@ -67,17 +89,24 @@
           <label class="custom-label mb-2">Phone Number</label>
 
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput type="tel" placeholder="Enter your phone number" formControlName="phoneNumber" />
+            <input
+              matInput
+              type="tel"
+              placeholder="Enter your phone number"
+              formControlName="phoneNumber"
+            />
 
-            <mat-error *ngIf="
-    createManagerForm.get('phoneNumber')?.invalid &&
-    (createManagerForm.get('phoneNumber')?.touched ||
-      createManagerForm.get('phoneNumber')?.dirty)
-  ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('phoneNumber')?.invalid &&
+                (createManagerForm.get('phoneNumber')?.touched ||
+                  createManagerForm.get('phoneNumber')?.dirty)
+              "
+            >
               {{
-              createManagerForm.get('phoneNumber')?.errors?.['required']
-              ? 'Phone number is required.'
-              : 'Please enter a valid Egyptian phone number.'
+                createManagerForm.get("phoneNumber")?.errors?.["required"]
+                  ? "Phone number is required."
+                  : "Please enter a valid Egyptian phone number."
               }}
             </mat-error>
           </mat-form-field>
@@ -88,25 +117,39 @@
           <label class="custom-label"> Password </label>
 
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password"
-              formControlName="password" (input)="createManagerForm.get('password')?.updateValueAndValidity()" />
-            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              placeholder="Enter your password"
+              formControlName="password"
+              (input)="
+                createManagerForm.get('password')?.updateValueAndValidity()
+              "
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hidePassword = !hidePassword"
+            >
               <mat-icon>
                 {{ hidePassword ? "visibility_off" : "visibility" }}
               </mat-icon>
             </button>
 
-            <mat-error *ngIf="
-                  createManagerForm.get('password')?.invalid &&
-                  (createManagerForm.get('password')?.dirty ||
-                    createManagerForm.get('password')?.touched)
-                ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('password')?.invalid &&
+                (createManagerForm.get('password')?.dirty ||
+                  createManagerForm.get('password')?.touched)
+              "
+            >
               {{
-              createManagerForm.get("password")?.errors?.["required"]
-              ? "Password is required"
-              : createManagerForm.get("password")?.errors?.["pattern"]
-              ? "Password must contain uppercase, lowercase, number and special character"
-              : ""
+                createManagerForm.get("password")?.errors?.["required"]
+                  ? "Password is required"
+                  : createManagerForm.get("password")?.errors?.["pattern"]
+                    ? "Password must contain uppercase, lowercase, number and special character"
+                    : ""
               }}
             </mat-error>
           </mat-form-field>
@@ -117,24 +160,38 @@
           <label class="custom-label"> Confirm Password </label>
 
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" placeholder="Confirm New Password"
-              formControlName="confirmPassword" required />
+            <input
+              matInput
+              [type]="hideConfirmPassword ? 'password' : 'text'"
+              placeholder="Confirm New Password"
+              formControlName="confirmPassword"
+              required
+            />
 
-            <mat-error *ngIf="
-                  createManagerForm.get('confirmPassword')?.errors?.['required']
-                ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('confirmPassword')?.errors?.['required']
+              "
+            >
               Confirm Password is required
             </mat-error>
 
-            <mat-error *ngIf="
-                  createManagerForm.get('confirmPassword')?.errors?.[
-                    'passwordMismatch'
-                  ]
-                ">
+            <mat-error
+              *ngIf="
+                createManagerForm.get('confirmPassword')?.errors?.[
+                  'passwordMismatch'
+                ]
+              "
+            >
               Passwords do not match
             </mat-error>
 
-            <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hideConfirmPassword = !hideConfirmPassword"
+            >
               <mat-icon>
                 {{ hideConfirmPassword ? "visibility_off" : "visibility" }}
               </mat-icon>
@@ -144,19 +201,31 @@
 
         <!-- Profile Image -->
         <div class="col-12">
-          <app-file-drop [existingImage]="imagePreview" [label]="'Drop Profile Image Here'" [isInvalid]="createManagerForm.get('profileImage')?.invalid
-              && (createManagerForm.get('profileImage')?.touched || createManagerForm.get('profileImage')?.dirty)"
-            (fileSelected)="onImageSelected($event)" (fileRemoved)="onImageRemoved()">
+          <app-file-drop
+            [existingImage]="imagePreview"
+            [label]="'Drop Profile Image Here'"
+            [isInvalid]="
+              createManagerForm.get('profileImage')?.invalid &&
+              (createManagerForm.get('profileImage')?.touched ||
+                createManagerForm.get('profileImage')?.dirty)
+            "
+            (fileSelected)="onImageSelected($event)"
+            (fileRemoved)="onImageRemoved()"
+          >
           </app-file-drop>
         </div>
 
         <!-- Button -->
         <div class="col-md-6 offset-md-3 mt-5">
-          <button class="main-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
-            type="submit">
+          <button
+            class="main-btn w-100 d-flex flex-row-reverse gap-2 align-items-center justify-content-center"
+            type="submit"
+          >
             <span>Save</span>
             <mat-spinner *ngIf="isLoading" diameter="22"></mat-spinner>
           </button>
         </div>
       </form>
     </section>
+  </section>
+</section>

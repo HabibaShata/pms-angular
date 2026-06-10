@@ -4,15 +4,15 @@ import { SidebarService } from 'src/app/core/services/sidebar.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 
 interface Menu {
-  label: string,
-  icon: string,
-  routerNavigate: string,
-  isActive: boolean
+  label: string;
+  icon: string;
+  routerNavigate: string;
+  isActive: boolean;
 }
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
   private readonly SidebarService = inject(SidebarService);
@@ -31,39 +31,41 @@ export class SidebarComponent {
     {
       label: 'Home',
       icon: 'fa fa-home',
-      routerNavigate: this.isManager() ? '/dashboard/manager' : '/dashboard/employee',
-      isActive: this.isManager() || this.isEmployee()
+      routerNavigate: this.isManager()
+        ? '/dashboard/manager'
+        : '/dashboard/employee',
+      isActive: this.isManager() || this.isEmployee(),
     },
     {
       label: 'Users',
       icon: 'fa-solid fa-users',
       routerNavigate: '/dashboard/manager/users',
-      isActive: this.isManager()
+      isActive: this.isManager(),
     },
     {
       label: 'Projects',
       icon: 'fa-solid fa-diagram-project',
       routerNavigate: '/dashboard/manager/projects',
-      isActive: this.isManager()
+      isActive: this.isManager(),
     },
     {
       label: 'Tasks',
       icon: 'fa-solid fa-list-check',
       routerNavigate: '/dashboard/manager/tasks',
-      isActive: this.isManager()
+      isActive: this.isManager(),
     },
     {
       label: 'Projects',
       icon: 'fa-solid fa-diagram-project',
       routerNavigate: '/dashboard/employee/projects',
-      isActive: this.isEmployee()
+      isActive: this.isEmployee(),
     },
     {
       label: 'Tasks',
       icon: 'fa-solid fa-list-check',
       routerNavigate: '/dashboard/employee/tasks',
-      isActive: this.isEmployee()
-    }
+      isActive: this.isEmployee(),
+    },
   ];
   //For Large Screens sidebar Collapsed State
   get isCollapsed() {
