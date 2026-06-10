@@ -105,15 +105,14 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     };
   }
 
-
   //view-project
   openViewDialog(item: IProject) {
     this.dialog.open(ViewDialogComponent, {
       data: {
         type: 'project',
-        item: item
+        item: item,
       },
-      width: '600px'
+      width: '600px',
     });
   }
 
@@ -123,11 +122,11 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       width: '500px',
       disableClose: true,
       data: {
-        name: item.title
-      }
+        name: item.title,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log('Delete confirmed', item.id);
       }

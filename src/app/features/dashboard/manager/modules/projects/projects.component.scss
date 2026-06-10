@@ -21,7 +21,6 @@
       .mat-mdc-form-field {
         font-size: 14px;
         margin: 10px;
-        width: 220px;
       }
 
       .odd-row {
@@ -59,9 +58,10 @@
         padding-inline: 20px !important;
       }
       .project-list-table-header .mdc-text-field {
-        padding: 0 !important;
-        height: 43px;
-        font-size: 17px;
+        padding: 5 !important;
+      }
+      .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 20px;
       }
     }
   }

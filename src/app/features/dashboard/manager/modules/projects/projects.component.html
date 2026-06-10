@@ -29,7 +29,7 @@
   <div class="container-fluid project-list-table-container mx-auto">
     <div class="project-list-table">
       <div class="project-list-table-header w-50">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label class="d-flex align-items-center gap-1">
             <mat-icon
               aria-hidden="false"
@@ -38,11 +38,7 @@
             ></mat-icon
             >Search By Title</mat-label
           >
-          <input
-            matInput
-            (keyup)="applyFilter($event)"
-            #input
-          />
+          <input matInput (keyup)="applyFilter($event)" #input />
         </mat-form-field>
       </div>
 

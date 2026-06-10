@@ -28,8 +28,8 @@
   <!-- start of table -->
   <div class="container-fluid project-list-table-container mx-auto">
     <div class="project-list-table">
-      <div class="project-list-table-header">
-        <mat-form-field>
+      <div class="project-list-table-header d-flex align-items-center">
+        <mat-form-field appearance="outline">
           <mat-label class="d-flex align-items-center gap-1">
             <mat-icon
               aria-hidden="false"
@@ -38,14 +38,24 @@
             ></mat-icon
             >Search By Title</mat-label
           >
-          <input
-            matInput
-            (keyup)="applyFilter($event)"
-            placeholder="Ex. Mia"
-            #input
-          />
+          <input matInput (keyup)="applyFilter($event)" #input />
         </mat-form-field>
         <mat-form-field>
+          <mat-label>
+            <mat-icon>filter_list</mat-icon>
+            filters
+          </mat-label>
+          <mat-select
+            [formControl]="toppings"
+            (selectionChange)="applySelectFilter($event)"
+          >
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
+              topping
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>
             <mat-icon>filter_list</mat-icon>
             filters
@@ -65,7 +75,7 @@
               topping
             }}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
 
       <div class="mat-elevation-z8">
