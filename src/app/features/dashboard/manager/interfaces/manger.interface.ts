@@ -80,3 +80,9 @@ export interface IPerson {
   creationDate: string;
   modificationDate: string;
 }
+export interface ITaskPayload {
+  title: string;
+  description: string;
+  employeeId: number;
+  projectId: number;
+}

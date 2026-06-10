@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  IPerson,
   IProject,
   IProjectPayload,
   IResponse,
   ITask,
+  ITaskPayload,
   IUserscount,
 } from '../interfaces/manger.interface';
 import { ITasksCount } from 'src/app/shared/Interfaces/general';
@@ -46,7 +48,14 @@ export class ManagerService {
       },
     });
   }
-
+  getUsersList(pageNumber: number, pageSize: number) {
+    return this.http.get<IResponse<IPerson>>('Users/Manager', {
+      params: {
+        pageNumber,
+        pageSize,
+      },
+    });
+  }
   //Tasks Services
   getTasks(pageNumber: number, pageSize: number): Observable<IResponse<ITask>> {
     return this.http.get<IResponse<ITask>>('Task/manager', {
@@ -55,5 +64,16 @@ export class ManagerService {
         pageSize: pageSize,
       },
     });
+  }
+
+  createTask(data: ITaskPayload): Observable<ITask> {
+    return this.http.post<ITask>('Task', data);
+  }
+  getTaskById(id: number): Observable<ITask> {
+    return this.http.get<ITask>(`Task/${id}`);
+  }
+
+  updateTask(id: number, data: ITaskPayload): Observable<ITask> {
+    return this.http.put<ITask>(`Task/${id}`, data);
   }
 }
