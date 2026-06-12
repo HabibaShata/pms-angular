@@ -126,9 +126,16 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('Delete confirmed', item.id);
-      }
+     if (result) {
+  this._managerService.deleteProject(item.id).subscribe({
+    next: () => {
+      this.fetchData(); // refresh table
+    },
+    error: (err) => {
+      console.error('Delete failed', err);
+    }
+  });
+}
     });
   }
 }

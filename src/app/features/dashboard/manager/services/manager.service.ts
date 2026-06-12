@@ -76,4 +76,13 @@ export class ManagerService {
   updateTask(id: number, data: ITaskPayload): Observable<ITask> {
     return this.http.put<ITask>(`Task/${id}`, data);
   }
+
+  //delete
+  deleteProject(id: number): Observable<any> {
+  return this.http.delete(`Project/${id}`);
+}
+
+deleteTask(id: number): Observable<any> {
+  return this.http.delete(`Task/${id}`);
+}
 }
