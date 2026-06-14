@@ -5,7 +5,7 @@ import {
   IResponse,
   IManager as User,
 } from '../../../interfaces/manger.interface';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,15 @@ export class UsersService {
     });
   }
 
-  getAndFilterLoggedUsers() {}
+  //To get Data for Local
+  getAllUsers(): Observable<IResponse<User>> {
+    return this.getUsers(1, 1).pipe(
+      switchMap((res) => {
+        const total = res.totalNumberOfRecords;
+        return this.getUsers(1, total);  // fetch everything
+      })
+    );
+  }
 
   AddManager(data: FormData): Observable<any> {
     return this.http.post<IResponse<IPerson>>('Users/create', data);

@@ -50,7 +50,6 @@
 
         <!-- CONTENT -->
         <ng-template #content>
-
           <ng-container *ngIf="dataSource.data && dataSource.data.length > 0; else emptyState">
             <table mat-table [dataSource]="dataSource" matSort>
               <!-- title Column -->
@@ -108,7 +107,7 @@
                       <mat-icon>visibility</mat-icon>
                       <span>View</span>
                     </button>
-                    <button mat-menu-item (click)="toggleUserStatus(row)">
+                    <button mat-menu-item (click)="openConfirmStatusDialog(row)">
                       <mat-icon>
                         {{ row.isActivated ? 'block' : 'check_circle' }}
                       </mat-icon>
@@ -130,10 +129,9 @@
                 </td>
               </tr>
             </table>
-
             <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageNumber - 1"
-              [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"
-              aria-label="Select page of users"></mat-paginator>
+              [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)" aria-label="Select page of users">
+            </mat-paginator>
           </ng-container>
         </ng-template>
 
