@@ -168,8 +168,15 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Delete task confirmed', item.id);
-      }
+  this._managerService.deleteTask(item.id).subscribe({
+    next: () => {
+      this.fetchData();
+    },
+    error: (err) => {
+      console.error('Delete task failed', err);
+    }
+  });
+}
     });
   }
 }
