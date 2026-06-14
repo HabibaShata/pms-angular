@@ -28,6 +28,11 @@
 
     a.nav-item {
       padding: 5px 10px;
+      &:hover {
+        span.span-hover {
+          transform: translateX(0px);
+        }
+      }
     }
 
     .label,

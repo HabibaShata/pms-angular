@@ -14,13 +14,12 @@ import { StatusEnum } from 'src/app/core/enums/general.enum';
 import { MatDialog } from '@angular/material/dialog';
 
 import { FormControl } from '@angular/forms';
-import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
-import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
-import { ITask, IResponse } from '../../interfaces/manger.interface';
+import { IResponse, ITask } from '../../interfaces/manger.interface';
 import { ManagerService } from '../../services/manager.service';
 import { MatSelectChange } from '@angular/material/select';
+import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
 import { ToastrService } from 'ngx-toastr';
-
 type TaskRow = ITask & { numUsers: number };
 
 @Component({
@@ -55,6 +54,14 @@ export class TasksComponent implements AfterViewInit, OnInit {
   selectedStatusFilter: string = '';
   isLoading: boolean = false;
   status = StatusEnum;
+  dataSource: MatTableDataSource<ITask> = new MatTableDataSource();
+  private searchSubject = new Subject<string>();
+  private _managerService = inject(ManagerService);
+  private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService)
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.configureDataSource();
@@ -85,7 +92,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
     this._managerService.getTasks(this.pageNumber, this.pageSize).subscribe({
       next: (res: IResponse<ITask>) => {
-        console.log('Tasks response:', res.data);
+        //console.log('Tasks response:', res.data);
         this.dataSource.data = res.data;
         setTimeout(() => {
           if (this.sort) {
@@ -164,8 +171,8 @@ export class TasksComponent implements AfterViewInit, OnInit {
       width: '550px',
       disableClose: true,
       data: {
-        name: item.title,
-      },
+        name: item.title
+      }
     });
 
     dialogRef.afterClosed().subscribe((result) => {

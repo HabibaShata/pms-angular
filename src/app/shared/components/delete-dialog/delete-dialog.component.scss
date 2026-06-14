@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.delete-title,.message,.sub-message{
+  font-family: var(--Montserrat);
+}
+
 .close-btn {
   position: absolute;
   right: 12px;

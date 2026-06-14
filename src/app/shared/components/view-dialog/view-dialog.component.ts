@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 export interface DialogData {
-  type: 'project' | 'task' | 'employee';
+  type: 'project' | 'task' | 'user';
   item: any;
 }
 

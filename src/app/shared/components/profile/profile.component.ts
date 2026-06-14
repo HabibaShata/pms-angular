@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { ICurrentUser } from 'src/app/features/auth/interfaces/auth';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { FileUtilServiceService } from '../../services/file-util-service.service';
+import { FileUtilServiceService } from '../../services/file-util.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +19,6 @@ export class ProfileComponent {
   private readonly toastr = inject(ToastrService)
   private readonly fileUtilService = inject(FileUtilServiceService);
   profileForm!: FormGroup;
-
-  //variables
   imageLink!: string
   assetUrl = environment.assetUrl;
   loadingData: boolean = false
@@ -28,19 +26,13 @@ export class ProfileComponent {
   showConfirmPassword = false;
   imagePreview: string | null = null;
   selectedImage!: File;
-  errorMessage: string = '';
   isLoading: boolean = false;
 
-  // Constractor
   constructor() { this.initForm(); }
 
   //Life Cycle Hooks
   ngOnInit(): void {
     this.getUserData()
-  }
-
-  ngOnDestroy(): void {
-    this.formSub.unsubscribe()
   }
 
   // Form Function
@@ -108,11 +100,9 @@ export class ProfileComponent {
 
     this.formSub = this.authService.updateCurrentUserData(formData).subscribe({
       next: (res) => {
-        this.errorMessage = '';
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessage = err.error?.message || 'Something went wrong';
         this.toastr.error(err.error.message, 'Error!');
         this.isLoading = false;
       },
@@ -143,5 +133,9 @@ export class ProfileComponent {
     this.profileForm.patchValue({
       profileImage: null,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe()
   }
 }
