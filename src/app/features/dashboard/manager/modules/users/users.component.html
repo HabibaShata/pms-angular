@@ -29,8 +29,10 @@
 
         <!-- STATUS FILTER -->
         <mat-form-field appearance="fill" class="custom-select">
-          <mat-label>Filter</mat-label>
-
+          <mat-label>
+            <mat-icon>filter_list</mat-icon>
+            filters
+          </mat-label>
           <mat-select (selectionChange)="onStatusFilter($event.value)">
             <mat-option value="all">All</mat-option>
             <mat-option value="active">Active</mat-option>
@@ -107,9 +109,11 @@
                       <span>View</span>
                     </button>
                     <button mat-menu-item (click)="toggleUserStatus(row)">
-                      <mat-icon></mat-icon>
+                      <mat-icon>
+                        {{ row.isActivated ? 'block' : 'check_circle' }}
+                      </mat-icon>
                       <span>
-                        {{ row.isActivated ? 'Deactivate' : 'Activate' }}
+                        {{ row.isActivated ? 'Block' : 'Unblock' }}
                       </span>
                     </button>
                   </mat-menu>
