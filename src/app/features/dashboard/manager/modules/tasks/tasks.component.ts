@@ -19,6 +19,7 @@ import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-
 import { ITask, IResponse } from '../../interfaces/manger.interface';
 import { ManagerService } from '../../services/manager.service';
 import { MatSelectChange } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 
 type TaskRow = ITask & { numUsers: number };
 
@@ -42,6 +43,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -168,15 +170,16 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-  this._managerService.deleteTask(item.id).subscribe({
-    next: () => {
-      this.fetchData();
-    },
-    error: (err) => {
-      console.error('Delete task failed', err);
-    }
-  });
-}
+        this._managerService.deleteTask(item.id).subscribe({
+          next: () => {
+            this.toastr.success(`Task deleted Successfully`, '!Success' )
+            this.fetchData();
+          },
+          error: (err) => {
+            console.error('Delete task failed', err);
+          }
+        });
+      }
     });
   }
 }

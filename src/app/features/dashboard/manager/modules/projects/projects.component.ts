@@ -14,6 +14,7 @@ import { ManagerService } from '../../services/manager.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewDialogComponent } from '../../../../../shared/components/view-dialog/view-dialog.component';
 import { DeleteDialogComponent } from '../../../../../shared/components/delete-dialog/delete-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-projects',
@@ -32,6 +33,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -130,9 +132,13 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   this._managerService.deleteProject(item.id).subscribe({
     next: () => {
       this.fetchData(); // refresh table
+
+      this.toastr.success(`Project deleted Successfully`, '!Success' )
     },
     error: (err) => {
       console.error('Delete failed', err);
+
+      this.toastr.error('Failed to delete project');
     }
   });
 }
