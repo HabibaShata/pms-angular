@@ -27,16 +27,6 @@ export class UsersComponent {
     'country',
     'actions',
   ];
-
-  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
-  private searchSubject = new Subject<string>();
-  private _usersService = inject(UsersService);
-  private dialog = inject(MatDialog);
-  private toaster = inject(ToastrService);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   selectedStatus: 'all' | 'active' | 'inactive' = 'all';
   pageSize: number = 10;
   pageNumber: number = 1;
@@ -45,6 +35,14 @@ export class UsersComponent {
   isLoading: boolean = false;
   usersData: User[] = [];
   searchText: string = '';
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
+  private searchSubject = new Subject<string>();
+  private _usersService = inject(UsersService);
+  private dialog = inject(MatDialog);
+  private toaster = inject(ToastrService);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.configureDataSource();
@@ -123,6 +121,7 @@ export class UsersComponent {
     this.pageSize = event.pageSize;
     this.fetchData();
   }
+  
   private configureDataSource(): void {
     this.dataSource.sortingDataAccessor = (item, property) => {
       console.log(item, property);
@@ -149,7 +148,7 @@ export class UsersComponent {
   openViewDialog(item: IPerson) {
     this.dialog.open(ViewDialogComponent, {
       data: {
-        type: 'employee',
+        type: 'user',
         item: item,
       },
       width: '600px',

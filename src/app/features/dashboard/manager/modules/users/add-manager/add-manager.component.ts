@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { matchPasswordValidator } from 'src/app/shared/custom-validators';
+import { matchPasswordValidator } from 'src/app/shared/confirm-password-validator';
 import { UsersService } from '../services/users.service';
 
 @Component({
@@ -20,7 +20,6 @@ export class AddManagerComponent {
   createManagerForm!: FormGroup
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true
-  errorMessage: string = '';
   isLoading: boolean = false;
   imagePreview: string | null = null;
 
@@ -65,12 +64,10 @@ export class AddManagerComponent {
 
     this.formSub = this.usersService.AddManager(formData).subscribe({
       next: (res) => {
-        this.errorMessage = '';
         this.toastr.success("Your Account Created Successfully", 'Success!');
         this.router.navigate(['/dashboard/manager/users']);
       },
       error: (err) => {
-        this.errorMessage = err.error?.message || 'Something went wrong';
         this.toastr.error(err.error.message, 'Error!');
         this.isLoading = false;
       },
