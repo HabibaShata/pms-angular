@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build -- --configuration=production",
+  "buildCommand": "npx ng build --configuration=production",
   "outputDirectory": "dist/pms-angular",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": null,
