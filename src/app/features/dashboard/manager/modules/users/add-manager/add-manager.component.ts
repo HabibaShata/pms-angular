@@ -36,7 +36,7 @@ export class AddManagerComponent {
       email: [null, [Validators.required, Validators.email]],
       profileImage: [null],
       password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
-      confirmPassword: [null, [Validators.required,]],
+      confirmPassword: [null],
     }, {
       validators: matchPasswordValidator('password', 'confirmPassword')
     })
