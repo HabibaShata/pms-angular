@@ -33,7 +33,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatTabsModule } from '@angular/material/tabs';
 const shared = [
   CommonModule,
   ReactiveFormsModule,
@@ -56,6 +56,7 @@ const shared = [
   DragDropModule,
   NgxFileDropModule,
   MatDialogModule,
+  MatTabsModule,
 ];
 
 @NgModule({

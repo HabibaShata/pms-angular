@@ -87,6 +87,8 @@ export class UsersComponent {
   applyCombinedFilter() {
     // Always filter from the original full data
     const filtered = this.usersData.filter((user) => {
+      console.log(this.searchText);
+
       const matchesSearch =
         !this.searchText ||
         user.userName.toLowerCase().includes(this.searchText) ||
@@ -121,12 +123,15 @@ export class UsersComponent {
     this.pageSize = event.pageSize;
     this.fetchData();
   }
-  
+
   private configureDataSource(): void {
     this.dataSource.sortingDataAccessor = (item, property) => {
-      console.log(item, property);
-      if (property) {
-        return (item as any)[property] ?? '';
+      switch (property) {
+        case 'status':
+          return item.isActivated;
+
+        default:
+          return (item as any)[property];
       }
     };
   }

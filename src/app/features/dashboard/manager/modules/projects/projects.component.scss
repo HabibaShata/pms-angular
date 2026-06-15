@@ -1,8 +1,19 @@
-@use '../../../../../../assets/styles/table.scss';
+@use "../../../../../../assets/styles/table.scss";
 
 .status {
   background-color: #315951e5;
   border-radius: 16px;
   padding: 6px 14px;
   color: #fff;
+}
+.unassigned {
+  color: #fff;
+  background: #922e25b2;
+
+  width: fit-content;
+}
+::ng-deep {
+  .mat-mdc-tab-label-container {
+    padding: 25px;
+  }
 }

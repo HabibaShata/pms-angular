@@ -132,7 +132,7 @@ export class AddEditTaskComponent implements OnInit {
     });
   }
   getProjects() {
-    this.managerService.getProjectList(1, 100).subscribe({
+    this.managerService.getManagerProjects(1, 100).subscribe({
       next: (res) => {
         this.projectsList = res.data;
       },
