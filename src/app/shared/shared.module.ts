@@ -33,6 +33,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BlockUserComponent } from './components/block-user/block-user.component';
 
 const shared = [
@@ -57,6 +58,7 @@ const shared = [
   DragDropModule,
   NgxFileDropModule,
   MatDialogModule,
+  MatTabsModule,
 ];
 
 @NgModule({

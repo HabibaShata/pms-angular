@@ -130,9 +130,12 @@ export class UsersComponent {
 
   private configureDataSource(): void {
     this.dataSource.sortingDataAccessor = (item, property) => {
-      console.log(item, property);
-      if (property) {
-        return (item as any)[property] ?? '';
+      switch (property) {
+        case 'status':
+          return item.isActivated;
+
+        default:
+          return (item as any)[property];
       }
     };
   }

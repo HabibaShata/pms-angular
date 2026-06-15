@@ -10,7 +10,6 @@ import {
   ITaskPayload,
   IUserscount,
 } from '../interfaces/manger.interface';
-import { ITasksCount } from 'src/app/shared/Interfaces/general';
 
 @Injectable({
   providedIn: 'root',
@@ -35,12 +34,25 @@ export class ManagerService {
     return this.http.put<IProject>(`Project/${id}`, data);
   }
 
-  getProjectList(
+  getManagerProjects(
     pageNumber: number,
     pageSize: number,
     searchQuery?: string,
   ): Observable<IResponse<IProject>> {
     return this.http.get<IResponse<IProject>>('Project/manager', {
+      params: {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        searchQuery: searchQuery ? searchQuery : '',
+      },
+    });
+  }
+  getAllProjects(
+    pageNumber: number,
+    pageSize: number,
+    searchQuery?: string,
+  ): Observable<IResponse<IProject>> {
+    return this.http.get<IResponse<IProject>>('Project', {
       params: {
         pageNumber: pageNumber,
         pageSize: pageSize,
@@ -79,10 +91,10 @@ export class ManagerService {
 
   //delete
   deleteProject(id: number): Observable<any> {
-  return this.http.delete(`Project/${id}`);
-}
+    return this.http.delete(`Project/${id}`);
+  }
 
-deleteTask(id: number): Observable<any> {
-  return this.http.delete(`Task/${id}`);
-}
+  deleteTask(id: number): Observable<any> {
+    return this.http.delete(`Task/${id}`);
+  }
 }
