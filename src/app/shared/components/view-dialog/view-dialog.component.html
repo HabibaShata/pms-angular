@@ -3,22 +3,47 @@
 </h2>
 
 <mat-dialog-content class="dialog-content">
+  <!---User Card-->
+  <ng-container *ngIf="data.type === 'user'">
+    <div class="user-card">
 
-  <!-- Header Card -->
-  <div class="top-card" *ngIf="data.type === 'user'">
-    <div class="title">
-      <span class="label">User Name:</span>
-      {{ data.item.userName }}
+      <div class="user-card__banner">
+        <div class="user-card__identity">
+          <p class="user-card__name">{{ data.item.userName}}</p>
+        </div>
+        <span class="user-card__status" [class.user-card__status--active]="data.item.isActivated">
+          {{ data.item.isActivated ? 'Active' : 'Inactive' }}
+        </span>
+        <div class="user-card__avatar">
+          {{ data.item.userName.slice(0,2) }}
+        </div>
+      </div>
+
+      <div class="user-card__body">
+        <div class="user-card__fields">
+          <div class="user-card__field">
+            <p class="user-card__field-label">Country</p>
+            <p class="user-card__field-value">{{ data.item.country }}</p>
+          </div>
+          <div class="user-card__field">
+            <p class="user-card__field-label">Phone number</p>
+            <p class="user-card__field-value">{{ data.item.phoneNumber }}</p>
+          </div>
+          <div class="user-card__field">
+            <p class="user-card__field-label">Tasks</p>
+            <p class="user-card__field-value">{{ data.item.task?.length }}</p>
+          </div>
+          <div class="user-card__field">
+            <p class="user-card__field-label">Status</p>
+            <p class="user-card__field-value">{{ data.item.isActivated ? 'Active' : 'Inactive' }}</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </ng-container>
 
-    <div class="desc">
-      <span class="label">Email:</span>
-      {{ data.item.email }}
-    </div>
-  </div>
-
+  <!----Project and Task-->
   <div class="top-card" *ngIf="data.type !== 'user'">
-
     <div class="title">
       <span class="label">Title:</span>
       {{ data.item.title }}
@@ -42,12 +67,12 @@
 
       <div class="info-card">
         <span class="label">Manager</span>
-        <span class="value">{{ data.item.manager?.userName }}</span>
+        <span class="value">{{ data.item.manager?.userName || 'N/A' }}</span>
       </div>
 
       <div class="info-card">
         <span class="label">Email</span>
-        <span class="value">{{ data.item.manager?.email }}</span>
+        <span class="value">{{ data.item.manager?.email || 'N/A' }}</span>
       </div>
 
       <div class="info-card">
@@ -62,7 +87,7 @@
 
       <div class="info-card">
         <span class="label">Status</span>
-        <span class="value">{{ data.item.status }}</span>
+        <span class="value">{{ data.item.status || 'N/A' }}</span>
       </div>
 
       <div class="info-card">
@@ -77,33 +102,6 @@
 
     </ng-container>
 
-    <!-- user -->
-    <ng-container *ngIf="data.type === 'user'">
-      <div class="info-grid">
-        <div class="info-card">
-          <span class="label">Country:</span>
-          <span class="value">{{ data.item.country }}</span>
-        </div>
-
-        <div class="info-card">
-          <span class="label">Phone Number</span>
-          <span class="value">{{ data.item.phoneNumber }}</span>
-        </div>
-
-        <div class="info-card">
-          <span class="label">Tasks</span>
-          <span class="value">{{ data.item.task?.length }}</span>
-        </div>
-
-        <div class="info-card">
-          <span class="label">Status</span>
-          <span class="value">
-            {{ data.item.isActivated ? 'Active' : 'Inactive' }}
-          </span>
-        </div>
-      </div>
-
-    </ng-container>
     <!-- COMMON -->
     <div class="info-card" *ngIf="data.type !== 'user'">
       <span class="label">Created</span>

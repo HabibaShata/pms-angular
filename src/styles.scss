@@ -112,3 +112,6 @@ body {
   color: #4F4F4F;
 }
 
+.mat-mdc-raised-button:not(:disabled){
+  color: #fff !important;
+}
