@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewDialogComponent } from '../../../../../shared/components/view-dialog/view-dialog.component';
 import { DeleteDialogComponent } from '../../../../../shared/components/delete-dialog/delete-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-projects',
@@ -22,51 +23,89 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = [
+  displayedAllProjectsColumns = [
+    'title',
+    'Statues',
+    'Manager Name',
+    'Date Created',
+  ];
+  displayedColumns = [
     'title',
     'Statues',
     'Num Tasks',
     'Date Created',
     'Actions',
   ];
-  dataSource: MatTableDataSource<IProject> = new MatTableDataSource<IProject>([]);
-  private searchSubject = new Subject<string>();
-  private _managerService = inject(ManagerService);
-  private dialog = inject(MatDialog);
-  private toastr = inject(ToastrService);
+  allProjectsDataSource: MatTableDataSource<IProject> =
+    new MatTableDataSource<IProject>([]);
+  myProjectsDataSource: MatTableDataSource<IProject> =
+    new MatTableDataSource<IProject>([]);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  currentTab: number = 0;
 
   pageSize: number = 10;
   pageNumber: number = 1;
   length: number = 0;
   searchQuery: string = '';
   isLoading: boolean = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  private searchSubject = new Subject<string>();
+  private _managerService = inject(ManagerService);
+  private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.configureDataSource();
-    this.fetchData();
+    this.featchAllProjects();
     this.searchSubject
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
         this.pageNumber = 1;
         this.searchQuery = (value as string).trim();
-        this.fetchData();
+
+        if (this.currentTab === 0) {
+          this.featchAllProjects();
+        } else {
+          this.fetchManagerProjectsData();
+        }
       });
   }
-  fetchData() {
+  fetchManagerProjectsData() {
     this.isLoading = true;
 
     this._managerService
-      .getProjectList(this.pageNumber, this.pageSize)
+      .getManagerProjects(this.pageNumber, this.pageSize, this.searchQuery)
       .subscribe({
         next: (res: IResponse<IProject>) => {
-          this.dataSource.data = res.data;
+          this.myProjectsDataSource.data = res.data;
 
           setTimeout(() => {
             if (this.sort) {
-              this.dataSource.sort = this.sort;
+              this.myProjectsDataSource.sort = this.sort;
+            }
+          });
+          this.length = res.totalNumberOfRecords;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Failed to load projects', err);
+          this.isLoading = false;
+        },
+      });
+  }
+  featchAllProjects() {
+    this.isLoading = true;
+    this._managerService
+      .getAllProjects(this.pageNumber, this.pageSize, this.searchQuery)
+      .subscribe({
+        next: (res: IResponse<IProject>) => {
+          this.allProjectsDataSource.data = res.data;
+
+          setTimeout(() => {
+            if (this.sort) {
+              this.allProjectsDataSource.sort = this.sort;
             }
           });
           this.length = res.totalNumberOfRecords;
@@ -80,12 +119,14 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.allProjectsDataSource.sort = this.sort;
+    this.myProjectsDataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.allProjectsDataSource.filter = filterValue.trim().toLowerCase();
+    this.myProjectsDataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.paginator) {
       this.paginator.firstPage();
@@ -95,15 +136,40 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   onPageChange(event: PageEvent) {
     this.pageNumber = event.pageIndex + 1;
     this.pageSize = event.pageSize;
-    this.fetchData();
+
+    if (this.currentTab === 0) {
+      this.featchAllProjects();``
+    } else {
+      this.fetchManagerProjectsData();
+    }
   }
   private configureDataSource(): void {
-    this.dataSource.sortingDataAccessor = (item, property) => {
-      console.log(item, property);
-      if (property) {
-        return (item as any)[property] ?? '';
+    const sortingAccessor = (item: IProject, property: string) => {
+      switch (property) {
+        case 'Num Tasks':
+          return item.task?.length;
+        case 'Date Created':
+          return item.creationDate;
+        case 'Manager Name':
+          return item.manager?.userName;
+        default:
+          return (item as any)[property];
       }
     };
+
+    this.allProjectsDataSource.sortingDataAccessor = sortingAccessor;
+    this.myProjectsDataSource.sortingDataAccessor = sortingAccessor;
+  }
+  onTabChange(event: MatTabChangeEvent) {
+    this.currentTab = event.index;
+    this.pageNumber = 1;
+    this.searchQuery = '';
+
+    if (this.currentTab === 0) {
+      this.featchAllProjects();
+    } else {
+      this.fetchManagerProjectsData();
+    }
   }
 
   //view-project
@@ -128,20 +194,22 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-     if (result) {
-  this._managerService.deleteProject(item.id).subscribe({
-    next: () => {
-      this.fetchData(); // refresh table
+      if (result) {
+        this._managerService.deleteProject(item.id).subscribe({
+          next: () => {
+            this.toastr.success('Project deleted Successfully', '!Success');
+            if (this.currentTab === 0) {
 
-      this.toastr.success(`Project deleted Successfully`, '!Success' )
-    },
-    error: (err) => {
-      console.error('Delete failed', err);
-
-      this.toastr.error('Failed to delete project');
-    }
-  });
-}
+              this.featchAllProjects();
+            } else {
+              this.fetchManagerProjectsData();
+            }
+          },
+          error: (err) => {
+            console.error('Delete failed', err);
+          },
+        });
+      }
     });
   }
 }

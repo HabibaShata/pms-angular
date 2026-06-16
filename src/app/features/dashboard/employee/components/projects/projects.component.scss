@@ -1,67 +1,8 @@
-.project-list-wrapper {
-  height: 100vh;
-  background-color: #f5f5f5;
-  .project-list-header {
-    padding: 20px;
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1490196078);
-    background: #fff;
-  }
-  .project-list-table-container {
-    padding: 20px;
-    .project-list-table {
-      background: #fff;
-      box-shadow: 0px 2px 4px 0px #00000026;
-      border-radius: 8px;
+@use '../../../../../../assets/styles/table.scss';
 
-      .mat-mdc-form-field {
-        font-size: 14px;
-        margin: 10px;
-      }
-
-      .odd-row {
-        background-color: #f5f5f5;
-        color: #4f4f4f;
-      }
-      .status {
-        background-color: #315951e5;
-        border-radius: 16px;
-        padding: 6px 14px;
-        color: #fff;
-      }
-    }
-
-    ::ng-deep {
-      .project-list-table-header .mat-mdc-text-field-wrapper {
-        border: 0.7px solid #26385a40;
-        border-radius: 46px;
-      }
-      .mdc-text-field--filled {
-        --mdc-filled-text-field-active-indicator-height: 0px !important;
-        background: #fff;
-      }
-      .mat-mdc-table thead {
-        background: #315951e5;
-      }
-      .mat-mdc-header-row,
-      .mat-sort-header-arrow {
-        color: #fff;
-      }
-      .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
-        .mat-mdc-form-field-infix {
-        padding-top: 8px !important;
-        padding-bottom: 10px !important;
-        padding-inline: 20px !important;
-      }
-      .project-list-table-header .mdc-text-field {
-        padding: 5 !important;
-      }
-      .project-list-table-header .mdc-text-field--outlined {
-        --mdc-outlined-text-field-container-shape: 20px;
-      }
-
-      .mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper {
-        transform: translateY(30%) !important;
-      }
-    }
-  }
+.status {
+  background-color: #315951e5;
+  border-radius: 16px;
+  padding: 6px 14px;
+  color: #fff;
 }

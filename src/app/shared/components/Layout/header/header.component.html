@@ -38,7 +38,7 @@
         <div class="px-3 py-2">
           <div class="d-flex align-items-center gap-2">
             <div class="avatar-img" *ngIf="currentUser.imagePath">
-              <img [src]="assetUrl + currentUser.imagePath" [alt]="currentUser.userName" />
+              <img [src]="assetUrl + currentUser.imagePath" (error)="onImageError($event)" [alt]="currentUser.userName" />
             </div>
 
             <div class="avatar" *ngIf="!currentUser.imagePath">

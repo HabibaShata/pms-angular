@@ -12,6 +12,6 @@ export function matchPasswordValidator(
     const firstValue = control.get(firstField)?.value;
     const secondValue = control.get(secondField)?.value;
 
-    return firstValue === secondValue ? null : { PasswordNoMatch: true };
+    return firstValue === secondValue ? null : { passwordMismatch: true };
   };
 }

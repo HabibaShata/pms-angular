@@ -14,13 +14,12 @@ import { StatusEnum } from 'src/app/core/enums/general.enum';
 import { MatDialog } from '@angular/material/dialog';
 
 import { FormControl } from '@angular/forms';
-import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
-import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
-import { ITask, IResponse } from '../../interfaces/manger.interface';
+import { IResponse, ITask } from '../../interfaces/manger.interface';
 import { ManagerService } from '../../services/manager.service';
 import { MatSelectChange } from '@angular/material/select';
+import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
 import { ToastrService } from 'ngx-toastr';
-
 type TaskRow = ITask & { numUsers: number };
 
 @Component({
@@ -39,6 +38,13 @@ export class TasksComponent implements AfterViewInit, OnInit {
   ];
   toppings = new FormControl('');
   toppingList: string[] = ['ToDo', 'InProgress', 'Done'];
+  pageSize: number = 10;
+  pageNumber: number = 1;
+  length: number = 0;
+  searchQuery: string = '';
+  selectedStatusFilter: string = '';
+  isLoading: boolean = false;
+  status = StatusEnum;
   dataSource: MatTableDataSource<ITask> = new MatTableDataSource();
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
@@ -47,14 +53,6 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  pageSize: number = 10;
-  pageNumber: number = 1;
-  length: number = 0;
-  searchQuery: string = '';
-  selectedStatusFilter: string = '';
-  isLoading: boolean = false;
-  status = StatusEnum;
 
   ngOnInit(): void {
     this.configureDataSource();
@@ -85,7 +83,6 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
     this._managerService.getTasks(this.pageNumber, this.pageSize).subscribe({
       next: (res: IResponse<ITask>) => {
-        console.log('Tasks response:', res.data);
         this.dataSource.data = res.data;
         setTimeout(() => {
           if (this.sort) {
@@ -127,6 +124,8 @@ export class TasksComponent implements AfterViewInit, OnInit {
     searchFilter: string,
     statusFilter: string,
   ): void {
+    console.log(searchFilter, statusFilter);
+
     this.dataSource.filterPredicate = (item: ITask, filter: string) => {
       const statusMatch = !statusFilter || item.status === statusFilter;
       const searchMatch =
@@ -176,7 +175,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
             this.fetchData();
           },
           error: (err) => {
-            console.error('Delete task failed', err);
+            console.error('Delete failed', err);
           }
         });
       }
