@@ -77,7 +77,15 @@ export class ManagerService {
       },
     });
   }
-
+  // All Users
+  getAllUsers(pageNumber: number, pageSize: number) {
+    return this.http.get<IResponse<IPerson>>('Users/', {
+      params: {
+        pageNumber,
+        pageSize,
+      },
+    });
+  }
   createTask(data: ITaskPayload): Observable<ITask> {
     return this.http.post<ITask>('Task', data);
   }

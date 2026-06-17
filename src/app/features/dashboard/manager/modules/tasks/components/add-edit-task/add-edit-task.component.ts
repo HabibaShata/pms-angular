@@ -99,7 +99,7 @@ export class AddEditTaskComponent implements OnInit {
       },
     });
   }
-  //Edit Project
+  //Update Task
   updateTask(taskData: ITaskPayload) {
     this.managerService.updateTask(this.taskId, taskData).subscribe({
       next: (res) => {
@@ -121,13 +121,11 @@ export class AddEditTaskComponent implements OnInit {
   }
 
   getUsers() {
-    this.managerService.getUsersList(1, 100).subscribe({
+    this.managerService.getAllUsers(1, 100).subscribe({
       next: (res) => {
         this.usersList = res.data;
+
         console.log(this.usersList);
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
