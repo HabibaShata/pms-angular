@@ -99,7 +99,7 @@ export class AddEditTaskComponent implements OnInit {
       },
     });
   }
-  //Edit Project
+  //Update Task
   updateTask(taskData: ITaskPayload) {
     this.managerService.updateTask(this.taskId, taskData).subscribe({
       next: (res) => {

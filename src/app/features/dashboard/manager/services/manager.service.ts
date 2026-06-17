@@ -77,6 +77,7 @@ export class ManagerService {
       },
     });
   }
+  // All Users
   getAllUsers(pageNumber: number, pageSize: number) {
     return this.http.get<IResponse<IPerson>>('Users/', {
       params: {
