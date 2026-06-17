@@ -121,13 +121,11 @@ export class AddEditTaskComponent implements OnInit {
   }
 
   getUsers() {
-    this.managerService.getUsersList(1, 100).subscribe({
+    this.managerService.getAllUsers(1, 100).subscribe({
       next: (res) => {
         this.usersList = res.data;
+
         console.log(this.usersList);
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
