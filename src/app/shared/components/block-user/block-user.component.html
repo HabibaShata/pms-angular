@@ -1,0 +1,39 @@
+<div class="dialog-overlay">
+  <div class="dialog-card">
+
+    <div class="dialog-header">
+      <div class="icon-wrap" [class.danger]="data.isActivated" [class.success]="!data.isActivated">
+        <mat-icon>{{ data.isActivated ? 'lock' : 'lock_open' }}</mat-icon>
+      </div>
+      <h2 class="text-capitalize">Confirm action</h2>
+    </div>
+
+    <mat-dialog-content>
+      <p class="dialog-message">
+        Are you sure you want to
+        <span [class.text-danger]="data.isActivated" [class.text-success]="!data.isActivated">
+          {{ data.isActivated ? 'block' : 'unblock' }}
+        </span>
+        this user?
+      </p>
+
+      <div class="user-chip">
+        <div class="avatar">{{data.userName.slice(0, 2).toUpperCase()}}</div>
+        <div>
+          <p class="chip-name">{{ data.userName }}</p>
+          <p class="chip-email">{{ data.email }}</p>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-stroked-button (click)="onCancel()">Cancel</button>
+      <button mat-flat-button
+        [color]="data.isActivated ? 'warn' : 'primary'"
+        (click)="onConfirm()">
+        Yes, {{ data.isActivated ? 'block' : 'unblock' }}
+      </button>
+    </mat-dialog-actions>
+
+  </div>
+</div>

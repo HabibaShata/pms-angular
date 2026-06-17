@@ -23,13 +23,8 @@
       <div class="project-list-table-header d-flex align-items-center mb-3">
         <mat-form-field appearance="fill" class="custom-input">
           <mat-label class="d-flex align-items-center gap-1">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="search"
-            ></mat-icon
-            >Search By Title</mat-label
-          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>Search By
+            Title</mat-label>
           <input matInput (keyup)="applyFilter($event)" #input />
         </mat-form-field>
 
@@ -38,34 +33,13 @@
             <mat-icon>filter_list</mat-icon>
             filters
           </mat-label>
-          <mat-select
-            [formControl]="toppings"
-            (selectionChange)="applySelectFilter($event)"
-          >
+          <mat-select [formControl]="toppings" (selectionChange)="applySelectFilter($event)">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
-              topping
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- <mat-form-field>
-          <mat-label>
-            <mat-icon>filter_list</mat-icon>
-            filters
-          </mat-label>
-          <mat-select [formControl]="toppings" multiple>
-            <mat-select-trigger>
-              {{ toppings.value?.[0] || "" }}
-              <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-                (+{{ (toppings.value?.length || 0) - 1 }}
-                {{ toppings.value?.length === 2 ? "other" : "others" }})
-              </span>
-            </mat-select-trigger>
             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
               topping
               }}</mat-option>
           </mat-select>
-        </mat-form-field> -->
+        </mat-form-field>
       </div>
 
       <div class="mat-elevation-z8">
@@ -76,7 +50,10 @@
 
         <!-- CONTENT -->
         <ng-template #content>
-          <ng-container *ngIf="dataSource.data && dataSource.data.length > 0; else emptyState">
+          <ng-container *ngIf="
+              dataSource.data && dataSource.data.length > 0;
+              else emptyState
+            ">
             <table mat-table [dataSource]="dataSource" matSort>
               <!-- Title Column -->
               <ng-container matColumnDef="title">
@@ -86,7 +63,9 @@
 
               <!-- Status Column -->
               <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Status
+                </th>
                 <td mat-cell *matCellDef="let row">
                   <ng-container [ngSwitch]="row.status">
                     <span *ngSwitchCase="status.ToDo" class="status to-do">{{
@@ -96,7 +75,9 @@
                     <span *ngSwitchCase="status.Done" class="status done">{{
                       row.status
                       }}</span>
-                    <span *ngSwitchDefault class="status">{{ row.status }}</span>
+                    <span *ngSwitchDefault class="status">{{
+                      row.status
+                      }}</span>
                   </ng-container>
                 </td>
               </ng-container>
@@ -111,7 +92,9 @@
 
               <!-- Project Column -->
               <ng-container matColumnDef="project">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Project
+                </th>
                 <td mat-cell *matCellDef="let row">
                   {{ row.project?.title || "" }}
                 </td>
@@ -140,7 +123,7 @@
                       <span>View</span>
                     </button>
                     <button mat-menu-item [routerLink]="['edit', row.id]">
-                      <mat-icon class="custom-icon-color">edit_square</mat-icon>
+                      <mat-icon>edit_square</mat-icon>
                       <span>Edit</span>
                     </button>
                     <button mat-menu-item (click)="openDeleteTaskDialog(row)">
@@ -172,7 +155,6 @@
         <ng-template #emptyState>
           <app-empty-status></app-empty-status>
         </ng-template>
-
       </div>
     </div>
   </div>
