@@ -14,7 +14,7 @@
           [description]="'welcome to PMS'"
         />
       </div>
-      <!------------>
+      <!----- End Auth Header------->
 
       <div class="container">
         <form
@@ -220,12 +220,10 @@
               >
                 Confirm Password is required
               </mat-error>
-
               <mat-error
                 *ngIf="
-                  registerForm.get('confirmPassword')?.errors?.[
-                    'passwordMismatch'
-                  ]
+                  registerForm.hasError('passwordMismatch') &&
+                  registerForm.get('confirmPassword')?.touched
                 "
               >
                 Passwords do not match

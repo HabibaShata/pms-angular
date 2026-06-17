@@ -1,17 +1,10 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-
+import { matchPasswordValidator } from 'src/app/shared/confirm-password-validator';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -71,7 +64,7 @@ export class RegisterComponent implements OnDestroy {
         ],
         confirmPassword: ['', Validators.required],
       },
-      { validators: this.passwordMatchValidator },
+      { validators: matchPasswordValidator('password', 'confirmPassword') },
     );
   }
 
@@ -130,24 +123,5 @@ export class RegisterComponent implements OnDestroy {
         this.isLoading = false;
       },
     });
-  }
-
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-
-    if (!password || !confirmPassword) {
-      return null;
-    }
-
-    if (confirmPassword.value && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-    } else {
-      if (confirmPassword.hasError('passwordMismatch')) {
-        confirmPassword.setErrors(null);
-      }
-    }
-
-    return null;
   }
 }

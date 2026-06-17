@@ -8,7 +8,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { matchPasswordValidator } from '../../confirm-password-validator';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -18,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly toastrService = inject(ToastrService);
-
+  private readonly router = inject(Router);
   hideOld = true;
   hideNew = true;
   hideConfirm = true;
@@ -43,19 +44,11 @@ export class ChangePasswordComponent implements OnInit {
         confirmNewPassword: ['', Validators.required],
       },
       {
-        validators: this.passwordMatch,
+        validators: matchPasswordValidator('newPassword', 'confirmNewPassword'),
       },
     );
   }
 
-  private passwordMatch(control: AbstractControl) {
-    const newPassword = control.get('newPassword')?.value;
-    const confirmNewPassword = control.get('confirmNewPassword')?.value;
-
-    return newPassword === confirmNewPassword
-      ? null
-      : { passwordMismatch: true };
-  }
   onSubmit() {
     if (this.changePassForm.invalid) {
       this.changePassForm.markAllAsTouched();

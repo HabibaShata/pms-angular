@@ -1,16 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { matchPasswordValidator } from 'src/app/shared/confirm-password-validator';
 @Component({
   selector: 'app-reset-pass',
   templateUrl: './reset-pass.component.html',
@@ -46,7 +39,7 @@ export class ResetPassComponent implements OnInit {
           [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{4,}$/)],
         ],
       },
-      { validators: this.passwordMatchValidator },
+      { validators: matchPasswordValidator('password', 'confirmPassword') },
     );
   }
 
@@ -79,33 +72,5 @@ export class ResetPassComponent implements OnInit {
         this._router.navigate(['/auth/login']);
       },
     });
-  }
-
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    console.log('Validating password match...', control);
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-
-    // Skip validation if controls are missing or confirmPassword hasn't been filled yet
-    if (!password || !confirmPassword || !confirmPassword.value) {
-      return null;
-    }
-
-    // If they don't match, set the error on the confirmation control
-    if (password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
-    } else {
-      // If they match, clear the mismatch error if it was previously set
-      if (confirmPassword.hasError('passwordMismatch')) {
-        const errors = confirmPassword.errors;
-        delete errors?.['passwordMismatch'];
-        confirmPassword.setErrors(
-          errors && Object.keys(errors).length > 0 ? errors : null,
-        );
-      }
-    }
-
-    return null;
   }
 }
