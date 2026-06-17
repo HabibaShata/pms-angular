@@ -14,6 +14,7 @@ import { ManagerService } from '../../services/manager.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewDialogComponent } from '../../../../../shared/components/view-dialog/view-dialog.component';
 import { DeleteDialogComponent } from '../../../../../shared/components/delete-dialog/delete-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
@@ -53,6 +54,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
   private searchSubject = new Subject<string>();
   private _managerService = inject(ManagerService);
   private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.configureDataSource();
@@ -136,7 +138,7 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
     this.pageSize = event.pageSize;
 
     if (this.currentTab === 0) {
-      this.featchAllProjects();
+      this.featchAllProjects();``
     } else {
       this.fetchManagerProjectsData();
     }
@@ -195,7 +197,9 @@ export class ProjectsComponent implements AfterViewInit, OnInit {
       if (result) {
         this._managerService.deleteProject(item.id).subscribe({
           next: () => {
+            this.toastr.success('Project deleted Successfully', '!Success');
             if (this.currentTab === 0) {
+
               this.featchAllProjects();
             } else {
               this.fetchManagerProjectsData();
